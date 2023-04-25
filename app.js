@@ -40,5 +40,5 @@ app.delete("/produkt", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Shop-Backend app listening on port ${port}`);
 });
