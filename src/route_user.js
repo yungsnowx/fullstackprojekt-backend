@@ -77,10 +77,32 @@ route_user.get("/all_user",async (req,res) =>{
 });
 
 route_user.put("/user_modified/:id", async (req,res) =>{
-
+    const user_update = {
+        vorname: req.params.vorname,
+        nachname:req.params.nachname,
+        email:req.params.req
+    };
+    const rlt = await db.pool.query(
+        `UPDATE User set vorname='${user_update.vorname}', nachname='${user_update.nachname}',
+                email='${user_update.email}'`
+    )
+        .then(() =>{
+            res.status(201).JSON({message:"Success"});
+        })
+        .catch(error =>{
+            res.status(401).json(error);
+        });
 });
 
 route_user.delete("/user_delete/:id",async (req,res) =>{
-
+    const rlt = await db .pool.query(
+        `delete from User where userID=${req.params.id}`
+    )
+        .then(() =>{
+            res.status(200).JSON({message:"Success"});
+        })
+        .catch(error => {
+            res.status(401).JSON(error);
+        });
 });
 module.exports = route_user;
