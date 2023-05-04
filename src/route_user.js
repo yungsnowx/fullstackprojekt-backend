@@ -13,21 +13,21 @@ route_user.post("/log_in",async (req, res) =>{
         passwort: req.body.passwort
     };
     if(!user){
-        res.status(401).json({error:"incorrect user"});
+        res.status(401).JSON({error:"incorrect user"});
     }
     const result = await db.pool.query(
         `SELECT passwort from User where email='${user.email}'`
     )
         .then((data) =>{
             if( bcrypt.compareSync(user.passwort, data[0].passwort)){
-                res.status(200).json({message:"Succesfull"});
+                res.status(200).JSON({message:"Succesfull"});
             }
             else{
-                res.status(401).json({message:"the password is false"});
+                res.status(401).JSON({message:"the password is false"});
             }
         })
         .catch(error=>{
-            res.status(401).json(error);
+            res.status(401).JSON(error);
         })
 });
 
@@ -52,15 +52,15 @@ route_user.post("/sign_in",async (req,res)=>{
                     ,${user.email},${password})`
                 )
                     .then(() =>{
-                        res.status(201).json({message:"save user"});
+                        res.status(201).JSON({message:"save user"});
                     })
                     .catch((error) =>{
-                        res.status(401).json(error);
+                        res.status(401).JSON(error);
                     })
             }
         })
         .catch((error) =>{
-            res.status(401).json(error);
+            res.status(401).JSON(error);
         });
 });
 
@@ -72,15 +72,15 @@ route_user.get("/all_user",async (req,res) =>{
             res.send(data);
         })
         .catch(error =>{
-            res.status(401).json(error);
+            res.status(401).JSON(error);
         });
 });
 
 route_user.put("/user_modified/:id", async (req,res) =>{
     const user_update = {
-        vorname: req.params.vorname,
-        nachname:req.params.nachname,
-        email:req.params.req
+        vorname: req.body.vorname,
+        nachname:req.body.nachname,
+        email:req.body.req
     };
     const rlt = await db.pool.query(
         `UPDATE User set vorname='${user_update.vorname}', nachname='${user_update.nachname}',
@@ -90,7 +90,7 @@ route_user.put("/user_modified/:id", async (req,res) =>{
             res.status(201).JSON({message:"Success"});
         })
         .catch(error =>{
-            res.status(401).json(error);
+            res.status(401).JSON(error);
         });
 });
 
