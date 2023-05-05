@@ -1,5 +1,14 @@
-const http  = require("http")
-const app = require("./app")
+const express = require("express");
+const bodyParser = require("body-parser");
+const route_produkt = require("./Routes/route_Produkt");
+const route_user = require("./Routes/route_user");
+const route_address = require("./Routes/route_Address");
+const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(route_produkt);
+app.use(route_address);
+app.use(route_user);
 
 const normalizePort  = (val) =>{
     const port = parseInt(val,10);
@@ -14,35 +23,33 @@ const normalizePort  = (val) =>{
         return false;
     }
 }
+const port = normalizePort(process.env.PORT||3000);
 
 const errorHandling = error =>{
     if(error.syscall != "listen"){
         throw  error;
     }
-    const address = server.address();
-    const bind = typeof address === "string"? "Pipe "+ address: "Port "+ address.port;
     switch (error.code) {
         case EACCES:
-            console.log(bind + " required a eleved grade");
+            console.log(port + " required a eleved grade");
             process.exit(1);
             break;
         case EADDRINUSE:
-            console.log(bind + " already use");
+            console.log(port + " already use");
             process.exit(1);
             break;
         default:
             throw error;
     }
 }
-const port = normalizePort(process.env.PORT||3000);
-app.set(port);
-const server = http.createServer(app)
+
+const server = app.listen(port);
+app.get("/",(req,res) =>{
+    res.send("Super");
+})
 server.on("listening",() =>{
-    const address = server.address();
-    const bind = typeof address === "string"? "Pipe "+ address: "Port "+ address.port;
-    console.log("Shop-Backend app listening on " + bind);
-    })
+    console.log("Shop-Backend server listening on " + port);
+})
+
 
 server.on("error", errorHandling);
-
-server.listen(port);

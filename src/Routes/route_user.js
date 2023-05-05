@@ -3,7 +3,7 @@ const express = require("express")
 const bcrypt = require("bcrypt");
 const route_user = express.Router();
 
-route_user.post("/log_in",async (req, res) =>{
+route_user.post("/users/log_in",async (req, res) =>{
     const user = {
         email:req.body.email,
         passwort: req.body.passwort
@@ -27,7 +27,7 @@ route_user.post("/log_in",async (req, res) =>{
         })
 });
 
-route_user.post("/sign_in",async (req,res)=>{
+route_user.post("/users/sign_in",async (req,res)=>{
     const user ={
         vorname: req.body.vorname,
         nachname: req.body.nachname,
@@ -60,7 +60,7 @@ route_user.post("/sign_in",async (req,res)=>{
         });
 });
 
-route_user.get("/all_user",async (req,res) =>{
+route_user.get("/users",async (req,res) =>{
     const rlt = await db.pool.query(
         `SELECT * from User`
     )
@@ -72,7 +72,7 @@ route_user.get("/all_user",async (req,res) =>{
         });
 });
 
-route_user.put("/user_modified/:id", async (req,res) =>{
+route_user.put("/users/:id", async (req,res) =>{
     const user_update = {
         vorname: req.params.vorname,
         nachname:req.params.nachname,
@@ -90,7 +90,7 @@ route_user.put("/user_modified/:id", async (req,res) =>{
         });
 });
 
-route_user.delete("/user_delete/:id",async (req,res) =>{
+route_user.delete("/users/:id",async (req,res) =>{
     const rlt = await db .pool.query(
         `delete from User where userID=${req.params.id}`
     )
