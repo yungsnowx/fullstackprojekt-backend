@@ -1,10 +1,7 @@
 const db = require("../Models/db");
 const express = require("express")
-const bodyParser = require("body-parser");
-
 const route_produkt = express.Router()
-route_produkt.use(bodyParser.json());
-route_produkt.use(bodyParser.urlencoded({ extended: false }));
+
 route_produkt.get("/produkt", async (req, res) => {
     const result = await db.pool.query("SELECT * FROM Produkt");
     res.send(result);

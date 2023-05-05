@@ -1,11 +1,7 @@
 const db = require("../Models/db");
 const express = require("express")
-const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
-
 const route_user = express.Router();
-route_user.use(bodyParser.json());
-route_user.use(bodyParser.urlencoded({ extended: false }));
 
 route_user.post("/log_in",async (req, res) =>{
     const user = {

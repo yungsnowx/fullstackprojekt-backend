@@ -1,11 +1,6 @@
 const db = require("../Models/db");
 const express = require("express");
-const bodyParser = require("body-parser");
 const route_Address = express.Router()
-
-
-route_Address.use(bodyParser.json());
-route_Address.use(bodyParser.urlencoded({ extended: false }));
 
 route_Address.post("/store_address",async (req, res) =>{
     const address ={
