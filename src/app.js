@@ -12,6 +12,7 @@ app.use(route_user);
 // app.listen(port, () => {
 //   console.log(`Shop-Backend app listening on port ${port}`);
 // });
+
 app.get("/",async (req,res) =>{
     res.status(200).json({message:"ok"});
 })
