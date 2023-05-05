@@ -1,4 +1,4 @@
-const db = require("./db");
+const db = require("../Models/db");
 const express = require("express");
 const bodyParser = require("body-parser");
 const route_Address = express.Router()
