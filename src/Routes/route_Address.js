@@ -1,7 +1,7 @@
 const db = require("../recycle_bin/db");
 const express = require("express");
 const route_Address = express.Router()
-
+const costum_address =  require("../Models/custom_address")
 route_Address.post("/address",async (req, res) =>{
     const address ={
         strasse:req.body.strasse,
@@ -10,11 +10,7 @@ route_Address.post("/address",async (req, res) =>{
         plz:req.body.plz,
         land:req.body.land
     }
-    const rlt = await db.pool.query(
-        `insert into Adresse(Straße,Hausnummer, Ort,PLZ,Land) value(
-            '${address.strasse}','${address.hausnummer}','${address.ort}',${address.plz},'${address.land}'
-        )`
-    )
+    const rlt = await costum_address.create(address)
         .then(() => {
             res.status(201).JSON({message:"Succes"});
         })
@@ -24,9 +20,7 @@ route_Address.post("/address",async (req, res) =>{
 });
 
 route_Address.get("/address/:id", async(req, res) =>{
-    const rlt = await db.pool.query(
-        `Select Straße, Hausnummer,Ort,PLZ,Land from Adresse where addresseID=${req.params.id}`
-    )
+    const rlt = await costum_address.get_record(req.params.id)
         .then(data => {
             res.send(data);
         })
@@ -34,6 +28,16 @@ route_Address.get("/address/:id", async(req, res) =>{
             res.status(401).JSON(error);
         });
 });
+
+route_Address.get("/address",async (req,res ) =>{
+    const rlt = await costum_address.get_all()
+        .then(data => {
+            res.send(data);
+        })
+        .catch(error => {
+            res.status(401).JSON(error);
+        });
+})
 route_Address.put("/address/:id", async (req, res) =>{
     const address_update ={
         strasse:req.body.strasse,
@@ -42,11 +46,7 @@ route_Address.put("/address/:id", async (req, res) =>{
         plz:req.body.plz,
         land:req.body.land
     }
-    const rlt = await db.pool.query(
-        `UPDATE Adresse SET Straße='${address_update.strasse}',Hausnummer='${address_update.hausnummer}',
-                            Ort='${address_update.ort}',PLZ=${address_update.plz},
-                            Land='${address_update.land}' where adresseID=${req.params.id}`
-    )
+    const rlt = await costum_address.save(address_update,req.params.id)
         .then(() =>{
             res.status(201).JSON({message:"Success"});
         })
@@ -57,9 +57,7 @@ route_Address.put("/address/:id", async (req, res) =>{
 
 route_Address.delete("/address/:id", async (req,res) =>{
 
-    const  rlt = await  db.pool.query(
-        `DELETE FROM Adresse where adresseID=${req.params.id}`
-    )
+    const  rlt = await  costum_address.remove(id)
         .then(() => {
             res.status(201).JSON({message:"Success"});
         })
