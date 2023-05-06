@@ -190,5 +190,5 @@ INSERT INTO `Warenkorbinhalt` VALUES (4, 1, 1);
 
 -- Für Bestellung
 
-INSERT INTO `Warenkorbinhalt` (warenkorbID, lieferadresse, rechnungsadresse, bezahlt) 
+INSERT INTO `Bestellung` (warenkorbID, lieferadresse, rechnungsadresse, bezahlt) 
 VALUES (3, 1, 2, 1);
