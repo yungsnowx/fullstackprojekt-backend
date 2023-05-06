@@ -1,6 +1,6 @@
 -- SQL-File für den Webshop
 -- Zuletzt geändert: 6.5.2023
--- Version: 2
+-- Version: 4
 -- Autor: Dimitrios Chalatsoglou
 
 -- Tabellenstruktur für Tabelle "Adresse"
@@ -22,8 +22,8 @@ CREATE TABLE `Bestellung` (
   `warenkorbID` int(11) UNSIGNED NOT NULL,
   `lieferadresse` int(11) UNSIGNED NOT NULL,
   `rechnungsadresse` int(11) UNSIGNED NOT NULL,
-  `bezahlt` tinyint(1),
-  `datum` timestamp,
+  `bezahlt` tinyint(1) DEFAULT NULL,
+  `datum` timestamp DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY(bestellID)
 );
 
