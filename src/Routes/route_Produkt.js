@@ -1,4 +1,4 @@
-const db = require("../Models/db");
+const db = require("../recycle_bin/db");
 const express = require("express")
 const route_produkt = express.Router()
 

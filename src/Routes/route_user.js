@@ -1,104 +1,101 @@
-const db = require("../Models/db");
 const express = require("express")
 const bcrypt = require("bcrypt");
 const route_user = express.Router();
+const custom_user = require("../Models/custom_user")
 
-route_user.post("/users/log_in",async (req, res) =>{
+route_user.post("/users/log_in", async (req, res) => {
     const user = {
-        email:req.body.email,
+        email: req.body.email,
         passwort: req.body.passwort
     };
-    if(!user){
-        res.status(401).json({error:"incorrect user"});
+    if (!user) {
+        res.status(401).json({error: "incorrect user"});
     }
-    const result = await db.pool.query(
-        `SELECT passwort from User where email='${user.email}'`
-    )
-        .then((data) =>{
-            if( bcrypt.compareSync(user.passwort, data[0].passwort)){
-                res.status(200).json({message:"Succesfull"});
+    const rlt = await custom_user.get_record(user.email)
+        .then(data => {
+            if (data) {
+                if (bcrypt.compareSync(user.passwort, data.dataValues.passwort)) {
+                    res.status(201).json({message: "Success"});
+                } else {
+                    res.status(401).json({message: "passwort not  correct"});
+                }
+            } else {
+                res.status(401).json({message: "any account"})
             }
-            else{
-                res.status(401).json({message:"the password is false"});
-            }
-        })
-        .catch(error=>{
-            res.status(401).json(error);
-        })
-});
 
-route_user.post("/users/sign_in",async (req,res)=>{
-    const user ={
-        vorname: req.body.vorname,
-        nachname: req.body.nachname,
-        email:req.body.email,
-        passwort: req.body.passwort
-    };
-    if(!user){
-        res.status(401).json({message:"empty user"});
-    }
-    const result = await  db.pool.query(
-        `select email from User where email='${user.email}'`
-    )
-        .then( async (data) =>{
-            if(!data){
-                const password = bcrypt.compareSync(user.passwort,10);
-                const rlt = await db.pool.query(
-                    `insert into User(vorname,nachname,email,passwort) VALUES(${user.vorname},${user.nachname}
-                    ,${user.email},${password})`
-                )
-                    .then(() =>{
-                        res.status(201).json({message:"save user"});
-                    })
-                    .catch((error) =>{
-                        res.status(401).json(error);
-                    })
-            }
-        })
-        .catch((error) =>{
-            res.status(401).json(error);
-        });
-});
-
-route_user.get("/users",async (req,res) =>{
-    const rlt = await db.pool.query(
-        `SELECT * from User`
-    )
-        .then((data) => {
-            res.send(data);
-        })
-        .catch(error =>{
-            res.status(401).json(error);
-        });
-});
-
-route_user.put("/users/:id", async (req,res) =>{
-    const user_update = {
-        vorname: req.params.vorname,
-        nachname:req.params.nachname,
-        email:req.params.req
-    };
-    const rlt = await db.pool.query(
-        `UPDATE User set vorname='${user_update.vorname}', nachname='${user_update.nachname}',
-                email='${user_update.email}'`
-    )
-        .then(() =>{
-            res.status(201).JSON({message:"Success"});
-        })
-        .catch(error =>{
-            res.status(401).json(error);
-        });
-});
-
-route_user.delete("/users/:id",async (req,res) =>{
-    const rlt = await db .pool.query(
-        `delete from User where userID=${req.params.id}`
-    )
-        .then(() =>{
-            res.status(200).JSON({message:"Success"});
         })
         .catch(error => {
-            res.status(401).JSON(error);
+            res.status(401).json(error);
         });
+});
+
+route_user.post("/users/sign_in", async (req, res) => {
+    const user = {
+        vorname: req.body.vorname,
+        nachname: req.body.nachname,
+        email: req.body.email,
+        passwort: req.body.passwort,
+        isAdmin: false
+    };
+    if (!user) {
+        res.status(401).json({message: "empty user"});
+    }
+    const rlt = await custom_user.get_record(user.email)
+        .then(data => {
+            console.log(data)
+            if (!data) {
+                user.passwort = bcrypt.hashSync(user.passwort, 10);
+                console.log(user)
+                const insert = custom_user.create(user)
+                    .then(() => {
+                        res.status(201).json({message: "Succes"});
+                    })
+                    .catch(error => {
+                        res.status(401).json(error);
+                    })
+            } else {
+                res.status(401).json({message: "already recorded"});
+            }
+        })
+        .catch(error => {
+            res.status(401).json(error);
+        })
+});
+
+
+route_user.get("/users", async (req, res) => {
+    const rlt = await custom_user.get_all()
+        .then(data => {
+            res.send(data);
+        })
+        .catch(error => {
+            res.status(400).json(error)
+        })
+});
+
+route_user.put("/users/:id", async (req, res) => {
+    const user_update = {
+        vorname: req.body.vorname,
+        nachname: req.body.nachname,
+        email: req.body.email
+    };
+    console.log(user_update)
+    const rlt = await custom_user.save(user_update, req.params.id)
+        .then(() => {
+            res.status(201).json({message: "success_1"});
+        })
+        .catch(error => {
+            res.status(401).json(error);
+        });
+});
+
+route_user.delete("/users/:id", async (req, res) => {
+    const rlt = await custom_user.remove(req.params.id)
+        .then(() => {
+            res.status(201).json({message: "Succces"});
+        })
+        .catch(error => {
+            res.status(401).json(error);
+        })
 });
 module.exports = route_user;

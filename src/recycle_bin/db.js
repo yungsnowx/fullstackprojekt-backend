@@ -1,4 +1,4 @@
-const mariadb = require("mariadb")
+const mariadb = require("mariadb");
 
 // Nutzer muss in der Datenbank erstellt werden
 const pool = mariadb.createPool({
@@ -11,4 +11,4 @@ const pool = mariadb.createPool({
 
 module.exports = Object.freeze({
     pool: pool
-})
+});
