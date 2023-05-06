@@ -1,5 +1,6 @@
 -- SQL-File für den Webshop
--- Zuletzt geändert: 6.5.2023 zum 1.Mal
+-- Zuletzt geändert: 6.5.2023
+-- Version: 2
 -- Autor: Dimitrios Chalatsoglou
 
 -- Tabellenstruktur für Tabelle "Adresse"
@@ -31,8 +32,7 @@ CREATE TABLE `Bestellung` (
 CREATE TABLE `Kundenadresse` (
   `userID` int(11) UNSIGNED NOT NULL,
   `adresseID` int(11) UNSIGNED NOT NULL,
-  PRIMARY KEY(userID),
-  PRIMARY KEY(adresseID)
+  PRIMARY KEY(userID, adresseID)
 );
 
 -- Tabellenstruktur für Tabelle "Produkt"
@@ -61,7 +61,7 @@ CREATE TABLE `User` (
 
 CREATE TABLE `Warenkorb` (
   `warenkorbID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `userID` int(11) UNSIGNED NOT NULL
+  `userID` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY(warenkorbID)
 );
 
@@ -71,8 +71,7 @@ CREATE TABLE `Warenkorbinhalt` (
   `warenkorbID` int(10) UNSIGNED NOT NULL,
   `produktID` int(10) UNSIGNED NOT NULL,
   `anzahl` int(11) NOT NULL,
-  PRIMARY KEY(warenkorbID),
-  PRIMARY KEY(produktID)
+  PRIMARY KEY(warenkorbID, produktID)
 );
 
 -- Fremdschlüssel
@@ -106,50 +105,50 @@ ALTER TABLE `Warenkorbinhalt`
 -- Für Adresse
 
 INSERT INTO `Adresse` (strasse, hausnummer, ort, plz, land)
-VALUES (Wormser Strasse, 109, Frankenthal, 67227, Deutschland);
+VALUES ("Wormser Strasse", 109, "Frankenthal", "67227", "Deutschland");
 
 INSERT INTO `Adresse` (strasse, hausnummer, ort, plz, land)
-VALUES (Wormser Strasse, 38, Frankenthal, 67227, Deutschland);
+VALUES ("Wormser Strasse", 38, "Frankenthal", "67227", "Deutschland");
 
 INSERT INTO `Adresse` (strasse, hausnummer, ort, plz, land)
-VALUES (Wormser Strasse, 28, Frankenthal, 67227, Deutschland);
+VALUES ("Wormser Strasse", 28, "Frankenthal", "67227", "Deutschland");
 
 INSERT INTO `Adresse` (strasse, hausnummer, ort, plz, land)
-VALUES (Carl-Zuckmayer-Straße, 4, Mannheim, 68169, Deutschland);
+VALUES ("Carl-Zuckmayer-Straße", 4, "Mannheim", "68169", "Deutschland");
 
 INSERT INTO `Adresse` (strasse, hausnummer, ort, plz, land)
-VALUES (Schiffbauerdamm, 5, Wismar, 23966, Deutschland);
+VALUES ("Schiffbauerdamm", 5, "Wismar", "23966", "Deutschland");
 
 INSERT INTO `Adresse` (strasse, hausnummer, ort, plz, land)
-VALUES (Treforest Road, 16, Coventry, CV3 1FN, England);
+VALUES ("Treforest Road", 16, "Coventry", "CV3 1FN", "England");
 
 -- Für User
 
 INSERT INTO `User` (vorname, nachname, email, passwort, isAdmin)
-VALUES (Dimitrios, Chalatsoglou, chalatsoglou-dimitrios@web.de, ilovejenniferaniston, 1);
+VALUES ("Dimitrios", "Chalatsoglou", "chalatsoglou-dimitrios@web.de", "ilovejenniferaniston", 1);
 
 INSERT INTO `User` (vorname, nachname, email, passwort, isAdmin)
-VALUES (Leon, Lovelock, lovelock@forlive.de, vibesitinman, 0);
+VALUES ("Leon", "Lovelock", "lovelock@forlive.de", "vibesitinman", 0);
 
 INSERT INTO `User` (vorname, nachname, email, passwort, isAdmin)
-VALUES (Bong, Tsetepe-Muani, muani@yahoo.de, gimmesome, 0);
+VALUES ("Bong", "Tsetepe-Muani", "muani@yahoo.de", "gimmesome", 0);
 
 INSERT INTO `User` (vorname, nachname, email, passwort, isAdmin)
-VALUES (Adam, Helpmme, helpmme@please.uk, hello, 0);
+VALUES ("Adam", "Helpmme", "helpmme@please.uk", "hello", 0);
 
 INSERT INTO `User` (vorname, nachname, email, passwort, isAdmin)
-VALUES (Aschkobar, die Nummer Eins, asche@gmail.com, wasbleibtistasche, 0);
+VALUES ("Aschkobar", "die Nummer Eins", "asche@gmail.com", "wasbleibtistasche", 0);
 
 -- Für Produkt
 
 INSERT INTO `Produkt` (produktname, produktbeschreibung, preis)
-VALUES (MacBookAir, "MacBook Air 2023 mit Apple M2-Chip, 16GB RAM, 256GB SSD" , 1699.99);
+VALUES ("MacBookAir", "MacBook Air 2023 mit Apple M2-Chip, 16GB RAM, 256GB SSD" , 1699.99);
 
 INSERT INTO `Produkt` (produktname, produktbeschreibung, preis)
-VALUES (Fitnesshantel, "Fitnesshantel 28kg Leichtmetall" , 14.99);
+VALUES ("Fitnesshantel", "Fitnesshantel 28kg Leichtmetall" , 14.99);
 
 INSERT INTO `Produkt` (produktname, produktbeschreibung, preis)
-VALUES (Cabanossis-Käse, "Cabanossis mit Käsegeschmack 500g" , 3.99);
+VALUES ("Cabanossis-Käse", "Cabanossis mit Käsegeschmack 500g" , 3.99);
 
 -- Für Kundenadresse
 
