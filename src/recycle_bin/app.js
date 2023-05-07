@@ -1,12 +1,13 @@
 const express = require("express");
-const port = 3000;
+
+//const port = 3000;
+const bodyParser = require("body-parser");
+const route_produkt = require("../Routes/route_Produkt");
+const route_user = require("./route_user");
+const route_address = require("../Routes/route_Address");
+
+
 const app = express();
-const bodyParser = require("body-parser")
-
-const route_produkt = require("./routes/route_Produkt");
-const route_user = require("./routes/route_user");
-const route_address = require("./routes/route_Address");
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
