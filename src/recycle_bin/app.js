@@ -2,9 +2,9 @@ const express = require("express");
 
 //const port = 3000;
 const bodyParser = require("body-parser");
-const route_produkt = require("../Routes/route_Produkt");
+const route_produkt = require("../routes/productRoutes");
 const route_user = require("./route_user");
-const route_address = require("../Routes/route_Address");
+const route_address = require("../routes/adressRoutes");
 
 
 const app = express();
