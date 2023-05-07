@@ -1,9 +1,9 @@
 const express = require("express")
 const bcrypt = require("bcrypt");
-const route_user = express.Router();
+const route_User = express.Router();
 const custom_user = require("../Models/custom_user")
 
-route_user.post("/users/log_in", async (req, res) => {
+route_User.post("/users/log_in", async (req, res) => {
     const user = {
         email: req.body.email,
         passwort: req.body.passwort
@@ -29,7 +29,7 @@ route_user.post("/users/log_in", async (req, res) => {
         });
 });
 
-route_user.post("/users/sign_in", async (req, res) => {
+route_User.post("/users/sign_in", async (req, res) => {
     const user = {
         vorname: req.body.vorname,
         nachname: req.body.nachname,
@@ -63,7 +63,7 @@ route_user.post("/users/sign_in", async (req, res) => {
 });
 
 
-route_user.get("/users", async (req, res) => {
+route_User.get("/users", async (req, res) => {
     const rlt = await custom_user.get_all()
         .then(data => {
             res.send(data);
@@ -73,7 +73,7 @@ route_user.get("/users", async (req, res) => {
         })
 });
 
-route_user.put("/users/:id", async (req, res) => {
+route_User.put("/users/:id", async (req, res) => {
     const user_update = {
         vorname: req.body.vorname,
         nachname: req.body.nachname,
@@ -89,7 +89,7 @@ route_user.put("/users/:id", async (req, res) => {
         });
 });
 
-route_user.delete("/users/:id", async (req, res) => {
+route_User.delete("/users/:id", async (req, res) => {
     const rlt = await custom_user.remove(req.params.id)
         .then(() => {
             res.status(201).json({message: "Succces"});
@@ -98,4 +98,4 @@ route_user.delete("/users/:id", async (req, res) => {
             res.status(401).json(error);
         })
 });
-module.exports = route_user;
+module.exports = route_User;
