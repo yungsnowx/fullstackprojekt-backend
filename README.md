@@ -6,7 +6,12 @@ Install dependencies
 npm install
 ```
 
-Run server
+Run dev server
+
+```bash
+npm run dev
+```
+Run normal server
 
 ```bash
 npm start
