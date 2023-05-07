@@ -1,6 +1,6 @@
 import {Sequelize} from 'sequelize'
 
-const sequelize = new Sequelize("shop", "shop_user", "123456", {
+const sequelize = new Sequelize("Webshop", "root", "123456", {
     dialect: "mariadb", dialectOptions: {
         connectTimeout: 10000,
     }, pool: {
