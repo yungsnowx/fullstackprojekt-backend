@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #Image bauen
 
 docker build -t database_container:latest ./DockerizedSQL/
