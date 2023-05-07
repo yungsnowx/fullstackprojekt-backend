@@ -1,20 +1,19 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import {router as productRouter} from './routes/productRoutes.js';
+import express from 'express'
+import bodyParser from 'body-parser'
+import {router as productRouter} from './routes/productRoutes.js'
+import {router as userRouter} from './routes/userRoutes.js'
+import {router as addressRouter} from './routes/addressRoutes.js'
 
-//const route_user = require("./routes/userRoutes");
-//const route_address = require("./routes/adressRoutes");
+const app = express()
+const port = process.env.PORT || 3000
 
-const app = express();
-const port = process.env.PORT || 3000;
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-
-app.use(productRouter);
-//app.use(route_address);
-//app.use(route_user);
+app.use(productRouter)
+app.use(addressRouter)
+app.use(userRouter)
 
 app.listen(port, () => {
-    console.log("Shop-Backend server listening on " + port);
+    console.log("Shop-Backend server listening on " + port)
 })

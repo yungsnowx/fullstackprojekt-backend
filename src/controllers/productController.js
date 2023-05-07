@@ -1,7 +1,7 @@
-import { getByID, getAll, remove, save } from '../models/productModel.js'
+import {getByID, getAll, removeByID, save} from '../models/productModel.js'
 
 async function getAllProductsAction(request, response) {
-    let product = await getAll();
+    let product = await getAll()
     response.json(product)
 }
 
@@ -23,9 +23,9 @@ async function updateProductAction(request, response) {
     response.json()
 }
 
-async function deleteProductAction(request, response) {
+async function deleteProductByIDAction(request, response) {
     let id = request.params.id
-    await remove(id)
+    await removeByID(id)
     response.json()
 }
 
@@ -49,5 +49,5 @@ export {
     getProductByIDAction,
     addProductAction,
     updateProductAction,
-    deleteProductAction
+    deleteProductByIDAction
 }

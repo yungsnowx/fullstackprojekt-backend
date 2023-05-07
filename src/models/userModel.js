@@ -1,78 +1,52 @@
-import {sequelize} from "../config/db";
-
-const {Sequelize, DataTypes, where} = require("sequelize");
-
+import {sequelize} from "../config/db.js"
+import {DataTypes} from "sequelize"
 
 const User = sequelize.define("User", {
-        userID: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            allowNull: false,
-            autoIncrement: true
-        },
-        vorname: {
-            type: DataTypes.STRING
+    userID: {
+        type: DataTypes.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true
+    }, vorname: {
+        type: DataTypes.STRING
+    }, nachname: {
+        type: DataTypes.STRING
+    }, email: {
+        type: DataTypes.STRING, allowNull: false
+    }, passwort: {
+        type: DataTypes.STRING, allowNull: false
+    }, isAdmin: {
+        type: DataTypes.BOOLEAN, allowNull: false
+    }
+}, {
+    timestamps: false, tableName: 'User', underscored: false, freezeTableName: true
+})
 
-        },
-        nachname: {
-            type: DataTypes.STRING
-
-        },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        passwort: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        isAdmin: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false
-        }
-    },
-    {
-        timestamps: false,
-        tableName: 'User',
-        underscored: false,
-        freezeTableName: true
-    });
-
-function get_all() {
-    return User.findAll();
+function getAll() {
+    return User.findAll()
 }
 
-function get_record(email) {
+function getByEmail(email) {
     return User.findOne({
-        where:
-            {email: email}
-    });
-}
-
-function create(user) {
-    return User.create(user)
-}
-
-function save(user, id) {
-    return User.update({vorname: user.vorname, nachname: user.nachname, email: user.email}, {
-        where: {
-            userID: id
-        }
-    });
-}
-
-function remove(id) {
-    return User.destroy({
-        where:
-            {userID: id}
+        where: {email: email}
     })
 }
 
+function save(user) {
+    return User.upsert(user)
+}
 
-module.exports = {
-    get_all,
-    create,
-    get_record,
-    save,
-    remove
-};
+function saveWithoutPassword(user) {
+    return User.update({
+        vorname: user.vorname,
+        nachname: user.nachname,
+        email: user.email
+    }, {where: {userID: user.userID}})
+}
+
+function removeByID(id) {
+    return User.destroy({
+        where: {userID: id}
+    })
+}
+
+export {
+    getAll, getByEmail, save, saveWithoutPassword, removeByID
+}
