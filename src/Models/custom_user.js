@@ -21,12 +21,12 @@ const User = sequelize.define("User",{
             autoIncrement:true
         },
         vorname:{
-            type: DataTypes.STRING,
-            allowNull: true
+            type: DataTypes.STRING
+
         },
         nachname:{
-            type: DataTypes.STRING,
-            allowNull: true
+            type: DataTypes.STRING
+
         },
         email :{
             type: DataTypes.STRING,

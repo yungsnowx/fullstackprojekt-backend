@@ -20,24 +20,24 @@ const address = sequelize.define("Adresse",{
         autoIncrement:true
     },
     Straße:{
-        type:DataTypes.STRING,
-        allowNull: true,
+        type:DataTypes.STRING
+
     },
     Hausnummer:{
-        type:DataTypes.STRING,
-        allowNull: true,
+        type:DataTypes.STRING
+
     },
     Ort:{
-        type:DataTypes.STRING,
-        allowNull: true,
+        type:DataTypes.STRING
+
     },
     PLZ:{
-        type:DataTypes.INTEGER,
-        allowNull: true,
+        type:DataTypes.INTEGER
+
     },
     Land:{
-        type:DataTypes.STRING,
-        allowNull:true
+        type:DataTypes.STRING
+
     }
 });
 

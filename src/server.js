@@ -1,8 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const route_produkt = require("./routes/route_Produkt");
-const route_user = require("./routes/route_user");
-const route_address = require("./routes/route_Address");
+const route_produkt = require("./Routes/route_Produkt");
+const route_user = require("./Routes/route_user");
+const route_address = require("./Routes/route_Address");
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,23 +26,6 @@ const normalizePort  = (val) =>{
 }
 const port = normalizePort(process.env.PORT||3000);
 
-const errorHandling = error =>{
-    if(error.syscall != "listen"){
-        throw  error;
-    }
-    switch (error.code) {
-        case EACCES:
-            console.log(port + " required a eleved grade");
-            process.exit(1);
-            break;
-        case EADDRINUSE:
-            console.log(port + " already use");
-            process.exit(1);
-            break;
-        default:
-            throw error;
-    }
-}
 
 const server = app.listen(port);
 app.get("/",(req,res) =>{
@@ -51,6 +34,3 @@ app.get("/",(req,res) =>{
 server.on("listening",() =>{
     console.log("Shop-Backend server listening on " + port);
 })
-
-
-server.on("error", errorHandling);
