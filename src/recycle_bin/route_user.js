@@ -1,4 +1,4 @@
-const db = require("./db");
+const db = require("../db");
 const express = require("express")
 const bcrypt = require("bcrypt");
 const route_user = express.Router();
@@ -9,21 +9,21 @@ route_user.post("/users/log_in",async (req, res) =>{
         passwort: req.body.passwort
     };
     if(!user){
-        res.status(401).json({error:"incorrect user"});
+        res.status(401).JSON({error:"incorrect user"});
     }
     const result = await db.pool.query(
         `SELECT passwort from User where email='${user.email}'`
     )
         .then((data) =>{
             if( bcrypt.compareSync(user.passwort, data[0].passwort)){
-                res.status(200).json({message:"Succesfull"});
+                res.status(200).JSON({message:"Succesfull"});
             }
             else{
-                res.status(401).json({message:"the password is false"});
+                res.status(401).JSON({message:"the password is false"});
             }
         })
         .catch(error=>{
-            res.status(401).json(error);
+            res.status(401).JSON(error);
         })
 });
 
@@ -48,15 +48,15 @@ route_user.post("/users/sign_in",async (req,res)=>{
                     ,${user.email},${password})`
                 )
                     .then(() =>{
-                        res.status(201).json({message:"save user"});
+                        res.status(201).JSON({message:"save user"});
                     })
                     .catch((error) =>{
-                        res.status(401).json(error);
+                        res.status(401).JSON(error);
                     })
             }
         })
         .catch((error) =>{
-            res.status(401).json(error);
+            res.status(401).JSON(error);
         });
 });
 
@@ -68,7 +68,7 @@ route_user.get("/users",async (req,res) =>{
             res.send(data);
         })
         .catch(error =>{
-            res.status(401).json(error);
+            res.status(401).JSON(error);
         });
 });
 
@@ -86,7 +86,7 @@ route_user.put("/users/:id", async (req,res) =>{
             res.status(201).JSON({message:"Success"});
         })
         .catch(error =>{
-            res.status(401).json(error);
+            res.status(401).JSON(error);
         });
 });
 

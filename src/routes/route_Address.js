@@ -1,4 +1,3 @@
-const db = require("../recycle_bin/db");
 const express = require("express");
 const route_Address = express.Router()
 const costum_address =  require("../Models/custom_address")
