@@ -1,7 +1,7 @@
 const db = require("../recycle_bin/db");
 const express = require("express")
 const route_produkt = express.Router()
-
+const custom_produkt = require("../Models/custom_produkt")
 route_produkt.get("/produkt", async (req, res) => {
     const result = await db.pool.query("SELECT * FROM Produkt");
     res.send(result);
