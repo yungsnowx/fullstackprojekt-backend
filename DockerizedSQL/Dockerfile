@@ -3,7 +3,7 @@ FROM mariadb:latest
 # Setze Umgebungsvariablen für MariaDB
 
 ENV MYSQL_ROOT_PASSWORD=my-secret-pw 
-ENV MYSQL_DATABASE=mydatabase 
+ENV MYSQL_DATABASE=Webshop 
 ENV MYSQL_USER=myuser 
 ENV MYSQL_PASSWORD=mypassword  
 

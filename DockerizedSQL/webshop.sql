@@ -1,11 +1,7 @@
 -- SQL-File für den Webshop
--- Zuletzt geändert: 7.5.2023
--- Version: 5
+-- Zuletzt geändert: 6.5.2023
+-- Version: 4
 -- Autor: Dimitrios Chalatsoglou
-
--- Datenbank erstellen
-
-CREATE DATABASE Webshop;
 
 -- Tabellenstruktur für Tabelle "Adresse"
 
