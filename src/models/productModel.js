@@ -8,7 +8,9 @@ const Product = sequelize.define("Produkt", {
         type: DataTypes.STRING, allowNull: false,
     }, produktbeschreibung: {
         type: DataTypes.STRING
-    },
+    }, preis: {
+        type: DataTypes.DOUBLE
+    }
 }, {
     timestamps: false, tableName: 'Produkt', underscored: false, freezeTableName: true
 })
