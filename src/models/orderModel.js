@@ -1,46 +1,47 @@
 import {sequelize} from "../config/db.js"
-import {DataTypes} from "sequelize"
+import {DataTypes, DECIMAL, TINYINT} from "sequelize"
 
-const Order = sequelize.define("Bestellung", {
+const Bestellung = sequelize.define("Bestellung", {
     bestellID: {
-        type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true
-    },warenkorbID: {
-        type: DataTypes.INTEGER, allowNull: false, foreignKey: true, autoIncrement: false
-    },lieferadresse: {
-        type: DataTypes.INTEGER, allowNull: false, foreignKey: true, autoIncrement: false
-    },rechnungsadresse: {
-        type: DataTypes.INTEGER, allowNull: false, foreignKey: true, autoIncrement: false
+        type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true, unsigned: true
+    }, warenkorbID: {
+        type: DataTypes.INTEGER, allowNull: false, foreignKey: true, unsigned: true
+    }, lieferadresse: {
+        type: DataTypes.INTEGER, allowNull: false, foreignKey: true, unsigned: true
+    },
+    rechnungsadresse: {
+        type: DataTypes.INTEGER, allowNull: false, foreignKey: true, unsigned: true
     },
     bezahlt: {
-        type: DataTypes.TINYINT, autoIncrement: false, default:null
+        type: DataTypes.TINYINT, allowNull: true ,default: null
     },
     datum: {
-        type: DataTypes.TIME, /*Nachfragen wegen "DataType"*/
-    }
+        type: DataTypes.TIME, /*'Nachfragen wegen Datatypes'*/
+    },
 }, {
-    timestamps: false, tableName: 'Bestellung', underscored: false, freezeTableName: true
+    timestamps: true, tableName: 'Bestellung', underscored: false, freezeTableName: true
 })
 
-function getAllOrder() {
-    return Order.findAll()
+function getAll() {
+    return Bestellung.findAll()
 }
 
-function getOrderByID(id) {
-    return Order.findByPk(id)
+function getByID(id) {
+    return Bestellung.findByPk(id)
 }
 
-function saveOrder(order) {
-    return Order.upsert(order)
+function save(product) {
+    return Bestellung.upsert(product)
 }
 
-function removeOrderByID(id) {
-    return Order.destroy({
+function removeByID(id) {
+    return Bestellung.destroy({
         where: {
-            orderID: id
+            produktID: id
         }
     })
 }
 
 export {
-    getOrderByID, getAllOrder, saveOrder, removeOrderByID
+    getByID, getAll, save, removeByID
 }

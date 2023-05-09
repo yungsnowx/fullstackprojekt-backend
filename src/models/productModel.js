@@ -1,16 +1,17 @@
 import {sequelize} from "../config/db.js"
-import {DataTypes} from "sequelize"
+import {DataTypes, DECIMAL} from "sequelize"
 
 const Product = sequelize.define("Produkt", {
     produktID: {
-        type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true
+        type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true, unsigned:true
     }, produktname: {
         type: DataTypes.STRING, allowNull: false,
     }, produktbeschreibung: {
         type: DataTypes.STRING
-    }, preis: {
-        type: DataTypes.DOUBLE
-    }
+    },
+    preis: {
+       type: DataTypes.DECIMAL, allowNull: false
+    },
 }, {
     timestamps: false, tableName: 'Produkt', underscored: false, freezeTableName: true
 })

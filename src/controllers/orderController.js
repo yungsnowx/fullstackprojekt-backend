@@ -1,54 +1,53 @@
-import {getOrderByID, getAllOrder, removeOrderByID, saveOrder} from '../models/orderModel.js'
-import {getByID} from "../models/addressModel.js";
+import {getByID, getAll, removeByID, save} from '../models/addressModel.js'
 
-async function getAllOrdersAction(request, response) {
-    let order = await getAllOrder()
-    response.json(order)
+async function getAllAdressAction(request, response) {
+    let adress = await getAll()
+    response.json(adress)
 }
 
-async function getOrderByIDAction(request, response) {
+async function getAdressByIDAction(request, response) {
     let id = request.params.id
-    let order = await getOrderByID(id)
-    response.json(order)
+    let adress = await getByID(id)
+    response.json(adress)
 }
 
-async function addOrderAction(request, response) {
-    let jsonObject = readOrderFromRequest(request)
-    await saveOrder(jsonObject)
+async function addAdressAction(request, response) {
+    let jsonObject = readAdressFromRequest(request)
+    await save(jsonObject)
     response.json()
 }
 
-async function updateOrderAction(request, response) {
-    let jsonObject = readOrderFromRequest(request)
-    await saveOrder(jsonObject)
+async function updateAdressAction(request, response) {
+    let jsonObject = readAdressFromRequest(request)
+    await save(jsonObject)
     response.json()
 }
 
-async function deleteOrderByIDAction(request, response) {
+async function deleteAdressByIDAction(request, response) {
     let id = request.params.id
-    await removeOrderByID(id)
+    await removeByID(id)
     response.json()
 }
 
-function readOrderFromRequest(request) {
+function readAdressFromRequest(request) {
     let body = request.body
-    let bestellID = body.bestellID
-    let warenkorbID = body.warenkorbID
-    let lieferadresse = body.lieferadresse
-    let rechnungsadresse = body.rechnungsadresse
-    let bezahlt = body.bezahlt
-    let datum = body.datum
+    let adresseID = body.adresseID
+    let strasse = body.strasse
+    let hausnummer = body.hausnummer
+    let ort = body.ort
+    let plz = body.plz
+    let land = body.land
 
     return {
-        'bestellID': bestellID,
-        'warenkorbID': warenkorbID,
-        'lieferadresse': lieferadresse,
-        'rechnungsadresse': rechnungsadresse,
-        'bezahlt': bezahlt,
-        'datum': datum
+        'adresseID': adresseID,
+        'strasse': strasse,
+        'hausnummer': hausnummer,
+        'ort': ort,
+        'plz': plz,
+        'land': land
     }
 }
 
 export {
-    getAllOrdersAction, getOrderByIDAction, addOrderAction, updateOrderAction, deleteOrderByIDAction
+    getAllAdressAction, getAdressByIDAction, addAdressAction, updateAdressAction, deleteAdressByIDAction
 }
