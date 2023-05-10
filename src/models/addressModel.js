@@ -40,5 +40,5 @@ function removeByID(id) {
 }
 
 export {
-    getByID, getAll, save, removeByID
+    getByID, getAll, save, removeByID,Address
 }

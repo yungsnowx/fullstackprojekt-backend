@@ -5,7 +5,7 @@ import {router as userRouter} from './routes/userRoutes.js'
 import {router as addressRouter} from './routes/addressRoutes.js'
 import {router as orderRouter} from './routes/orderRoutes.js'
 import {router as cartRouter} from './routes/cartRoutes.js'
-
+import {router as useraddress} from './routes/useradresseRoutes.js'
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -18,7 +18,7 @@ app.use(addressRouter)
 app.use(userRouter)
 app.use(orderRouter)
 app.use(cartRouter)
-
+app.use(useraddress)
 app.listen(port, () => {
     console.log("Shop-Backend server listening on " + port)
 })
