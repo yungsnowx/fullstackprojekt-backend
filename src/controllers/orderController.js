@@ -1,5 +1,5 @@
 import {getOrderByID, getAllOrder, removeOrderByID, saveOrder} from '../models/orderModel.js'
-import {getByID} from "../models/addressModel.js";
+import {getByID as getAddressByID} from "../models/addressModel.js";
 
 async function getAllOrdersAction(request, response) {
     let order = await getAllOrder()
@@ -9,7 +9,20 @@ async function getAllOrdersAction(request, response) {
 async function getOrderByIDAction(request, response) {
     let id = request.params.id
     let order = await getOrderByID(id)
-    response.json(order)
+
+    let lieferadresse = await getAddressByID(order.lieferadresse)
+    let rechnungsadresse = await getAddressByID(order.rechnungsadresse)
+
+    let combinedJson = {
+        'bestellID': order.bestellID,
+        'warenkorbID': order.warenkorbID,
+        'lieferadresse': lieferadresse,
+        'rechnungsadresse': rechnungsadresse,
+        'bezahlt': order.bezahlt,
+        'datum': order.datum
+    }
+
+    response.json(combinedJson)
 }
 
 async function addOrderAction(request, response) {

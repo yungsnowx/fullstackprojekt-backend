@@ -15,7 +15,7 @@ const Order = sequelize.define("Bestellung", {
         type: DataTypes.TINYINT, autoIncrement: false, default:null
     },
     datum: {
-        type: DataTypes.TIME, /*Nachfragen wegen "DataType"*/
+        type: DataTypes.DATE,
     }
 }, {
     timestamps: false, tableName: 'Bestellung', underscored: false, freezeTableName: true
