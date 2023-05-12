@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#Docker Daemon starten
+
+systemctl --user start docker-desktop
+
 #Image bauen
 
 docker build -t database_container:latest ./DockerizedSQL/
