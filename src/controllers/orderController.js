@@ -1,14 +1,14 @@
-import {getOrderByID, getAllOrder, removeOrderByID, saveOrder} from '../models/orderModel.js'
+import {getByID, getAll, removeByID, save} from '../models/orderModel.js'
 import {getByID as getAddressByID} from "../models/addressModel.js";
 
 async function getAllOrdersAction(request, response) {
-    let order = await getAllOrder()
+    let order = await getAll()
     response.json(order)
 }
 
-async function getOrderByIDAction(request, response) {
+async function getOrderByIdAction(request, response) {
     let id = request.params.id
-    let order = await getOrderByID(id)
+    let order = await getByID(id)
 
     let lieferadresse = await getAddressByID(order.lieferadresse)
     let rechnungsadresse = await getAddressByID(order.rechnungsadresse)
@@ -27,19 +27,19 @@ async function getOrderByIDAction(request, response) {
 
 async function addOrderAction(request, response) {
     let jsonObject = readOrderFromRequest(request)
-    await saveOrder(jsonObject)
+    await save(jsonObject)
     response.json()
 }
 
 async function updateOrderAction(request, response) {
     let jsonObject = readOrderFromRequest(request)
-    await saveOrder(jsonObject)
+    await save(jsonObject)
     response.json()
 }
 
-async function deleteOrderByIDAction(request, response) {
+async function deleteOrderByIdAction(request, response) {
     let id = request.params.id
-    await removeOrderByID(id)
+    await removeByID(id)
     response.json()
 }
 
@@ -63,5 +63,5 @@ function readOrderFromRequest(request) {
 }
 
 export {
-    getAllOrdersAction, getOrderByIDAction, addOrderAction, updateOrderAction, deleteOrderByIDAction
+    getAllOrdersAction, getOrderByIdAction, addOrderAction, updateOrderAction, deleteOrderByIdAction
 }

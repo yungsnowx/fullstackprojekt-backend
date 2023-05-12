@@ -4,36 +4,34 @@ import {DataTypes} from "sequelize"
 const Order = sequelize.define("Bestellung", {
     bestellID: {
         type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true
-    },warenkorbID: {
+    }, warenkorbID: {
         type: DataTypes.INTEGER, allowNull: false, foreignKey: true, autoIncrement: false
-    },lieferadresse: {
+    }, lieferadresse: {
         type: DataTypes.INTEGER, allowNull: false, foreignKey: true, autoIncrement: false
-    },rechnungsadresse: {
+    }, rechnungsadresse: {
         type: DataTypes.INTEGER, allowNull: false, foreignKey: true, autoIncrement: false
-    },
-    bezahlt: {
-        type: DataTypes.TINYINT, autoIncrement: false, default:null
-    },
-    datum: {
+    }, bezahlt: {
+        type: DataTypes.TINYINT, autoIncrement: false, default: null
+    }, datum: {
         type: DataTypes.DATE,
     }
 }, {
     timestamps: false, tableName: 'Bestellung', underscored: false, freezeTableName: true
 })
 
-function getAllOrder() {
+function getAll() {
     return Order.findAll()
 }
 
-function getOrderByID(id) {
+function getByID(id) {
     return Order.findByPk(id)
 }
 
-function saveOrder(order) {
+function save(order) {
     return Order.upsert(order)
 }
 
-function removeOrderByID(id) {
+function removeByID(id) {
     return Order.destroy({
         where: {
             orderID: id
@@ -42,5 +40,5 @@ function removeOrderByID(id) {
 }
 
 export {
-    getOrderByID, getAllOrder, saveOrder, removeOrderByID
+    getByID, getAll, save, removeByID
 }

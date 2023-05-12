@@ -1,39 +1,38 @@
-import {getCartByID, getAll, removeByID, save} from '../models/cartModel.js'
+import {getByID, getAll, removeByID, save} from '../models/cartModel.js'
 
 async function getAllCartsAction(request, response) {
-    let cart = await getAll()
-    response.json(cart)
+    let carts = await getAll()
+    response.json(carts)
 }
 
-async function getCartByIDAction(request, response) {
+async function getCartByIdAction(request, response) {
     let id = request.params.id
-    let cart = await getCartByID(id)
+    let cart = await getByID(id)
     response.json(cart)
 }
 
 async function addCartAction(request, response) {
-    let jsonObject = readOrderFromRequest(request)
+    let jsonObject = readCartFromRequest(request)
     await save(jsonObject)
     response.json()
 }
 
 async function updateCartAction(request, response) {
-    let jsonObject = readOrderFromRequest(request)
+    let jsonObject = readCartFromRequest(request)
     await save(jsonObject)
     response.json()
 }
 
-async function deleteCartByIDAction(request, response) {
+async function deleteCartByIdAction(request, response) {
     let id = request.params.id
     await removeByID(id)
     response.json()
 }
 
-function readOrderFromRequest(request) {
+function readCartFromRequest(request) {
     let body = request.body
     let warenkorbID = body.warenkorbID
     let userID = body.userID
-
 
     return {
         'warenkorbID': warenkorbID,
@@ -42,5 +41,9 @@ function readOrderFromRequest(request) {
 }
 
 export {
-    getAllCartsAction, getCartByIDAction, addCartAction, updateCartAction, deleteCartByIDAction
+    getAllCartsAction,
+    getCartByIdAction,
+    addCartAction,
+    updateCartAction,
+    deleteCartByIdAction
 }

@@ -1,35 +1,35 @@
 import {getByID, getAll, removeByID, save} from '../models/addressModel.js'
 
-async function getAllAdressAction(request, response) {
-    let adress = await getAll()
-    response.json(adress)
+async function getAllAddressesAction(request, response) {
+    let addresses = await getAll()
+    response.json(addresses)
 }
 
-async function getAdressByIDAction(request, response) {
+async function getAddressByIdAction(request, response) {
     let id = request.params.id
-    let adress = await getByID(id)
-    response.json(adress)
+    let address = await getByID(id)
+    response.json(address)
 }
 
-async function addAdressAction(request, response) {
-    let jsonObject = readAdressFromRequest(request)
+async function addAddressAction(request, response) {
+    let jsonObject = readAddressFromRequest(request)
     await save(jsonObject)
     response.json()
 }
 
-async function updateAdressAction(request, response) {
-    let jsonObject = readAdressFromRequest(request)
+async function updateAddressAction(request, response) {
+    let jsonObject = readAddressFromRequest(request)
     await save(jsonObject)
     response.json()
 }
 
-async function deleteAdressByIDAction(request, response) {
+async function deleteAddressByIdAction(request, response) {
     let id = request.params.id
     await removeByID(id)
     response.json()
 }
 
-function readAdressFromRequest(request) {
+function readAddressFromRequest(request) {
     let body = request.body
     let adresseID = body.adresseID
     let strasse = body.strasse
@@ -49,5 +49,9 @@ function readAdressFromRequest(request) {
 }
 
 export {
-    getAllAdressAction, getAdressByIDAction, addAdressAction, updateAdressAction, deleteAdressByIDAction
+    getAllAddressesAction,
+    getAddressByIdAction,
+    addAddressAction,
+    updateAddressAction,
+    deleteAddressByIdAction
 }

@@ -1,16 +1,20 @@
 import Router from 'express'
 import {
-    addUserAction, deleteUserByIDAction, getAllUsersAction, loginUserAction, updateUserAction
+    addUserAction,
+    deleteUserByIdAction,
+    getAllUsersAction,
+    loginUserAction,
+    updateUserAction
 } from '../controllers/userController.js'
 
 const router = Router()
-const routename = 'users'
+const routeName = 'users'
 
-router.get(`/${routename}`, getAllUsersAction)
-router.post(`/${routename}/log_in`, loginUserAction)
-router.post(`/${routename}/sign_in`, addUserAction)
-router.post(`/${routename}`, addUserAction)
-router.put(`/${routename}`, updateUserAction)
-router.delete(`/${routename}/:id`, deleteUserByIDAction)
+router.get(`/${routeName}`, getAllUsersAction)
+router.post(`/${routeName}/log_in`, loginUserAction)
+router.post(`/${routeName}/sign_in`, addUserAction)
+router.post(`/${routeName}`, addUserAction)
+router.put(`/${routeName}`, updateUserAction)
+router.delete(`/${routeName}/:id`, deleteUserByIdAction)
 
 export {router}
