@@ -1,6 +1,5 @@
 import {sequelize} from "../config/db.js"
 import {DataTypes} from "sequelize"
-import {Address} from "./addressModel.js";
 
 const Order = sequelize.define("Bestellung", {
     bestellID: {
@@ -16,19 +15,14 @@ const Order = sequelize.define("Bestellung", {
         type: DataTypes.TINYINT, autoIncrement: false, default:null
     },
     datum: {
-        type: DataTypes.TIME, /*Nachfragen wegen "DataType"*/
+        type: DataTypes.DATE,
     }
 }, {
     timestamps: false, tableName: 'Bestellung', underscored: false, freezeTableName: true
 })
 
-Order.belongsTo(Address, {foreignKey: 'lieferadresse'})
-Order.belongsTo(Address, {foreignKey: 'rechnungsadresse'})
-Address.hasOne(Order, {foreignKey: 'lieferadresse'})
-Address.hasOne(Order, {foreignKey: 'rechnungsadresse'})
-
 function getAllOrder() {
-    return Order.findAll({include: Address})
+    return Order.findAll()
 }
 
 function getOrderByID(id) {
