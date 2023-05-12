@@ -28,9 +28,9 @@ function getByID_User(id){
         userID:id
         }});
 }
-function getID_Address(id){
+function getByID_Address(id){
     return user_Adresse.findOne({where:{
-            addressID:id
+            adresseID:id
         }});
 }
 function  save(user_address_in){
@@ -45,5 +45,5 @@ function deleteID(userID,addressID){
         }})
 }
 export {
-    getAll,getByID_User,getID_Address,save,create,deleteID
+    getAll,getByID_User,getByID_Address,save,create,deleteID
 }

@@ -1,4 +1,4 @@
-import {getAll,getByID_User,getID_Address,save,deleteID,create} from "../models/useradresseModel.js";
+import {getAll,getByID_User,getByID_Address,save,deleteID,create} from "../models/useradresseModel.js";
 import {getByID as get_id} from "../models/userModel.js";
 import {getByID} from "../models/addressModel.js";
 
@@ -7,6 +7,19 @@ async  function getAllUseraddresseAction(request, response){
     response.json(user_address);
 }
 async function getUseraddresseByIdUserAction(request,response){
+
+    let id = request.params.id;
+    let user_address = await getByID_Address(id);
+    let address = await  getByID(user_address.adresseID)
+    const res ={
+        "userID": id,
+        "addressID": address
+    }
+
+    response.json(res);
+}
+async function getUseraddressByIdAdressAction(request, response){
+
     let id = request.params.id;
     let user_address = await getByID_User(id);
     let user = await  get_id(user_address.userID)
@@ -14,17 +27,6 @@ async function getUseraddresseByIdUserAction(request,response){
         "userID": user,
         "addressID":id
     }
-    response.json(res);
-}
-async function getUseraddresseByIdAdresseAction(request,response){
-    let id = request.params.id;
-    let user_address = await getID_Address(id);
-    let address = await  getByID(user_address.addressID)
-    const res ={
-        "userID": id,
-        "addressID": address
-    }
-
     response.json(res);
 }
 async  function addUseraddresseAction(request,response){
@@ -49,7 +51,7 @@ function readUseraddressFromRequest(request){
     }
 }
 export {
-    getAllUseraddresseAction,getUseraddresseByIdAdresseAction
+    getAllUseraddresseAction,getUseraddressByIdAdressAction
     ,addUseraddresseAction,updateUseraddresseAction,deleteUseraddresseAction,
     getUseraddresseByIdUserAction
 }
