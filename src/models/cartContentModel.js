@@ -2,26 +2,28 @@ import {sequelize} from "../config/db.js"
 import {DataTypes} from "sequelize"
 
 
-const cartContent = sequelize.define("warenkorbInhalt", {
-    warenkorbID: {
-        type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: false
-    },produktID: {
-        type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: false
-    },
-    anzahl: {
-        type: DataTypes.INTEGER, allowNull: false, autoIncrement: false
-    }
+const CartContent = sequelize.define("Warenkorbinhalt", {
+        warenkorbinhaltID: {
+            type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true
+        }, warenkorbID: {
+            type: DataTypes.INTEGER, allowNull: false, foreignKey: true, unsigned: true
+        }, produktID: {
+            type: DataTypes.INTEGER, allowNull: false, foreignKey: true, unsigned: true
+        }, anzahl: {
+            type: DataTypes.INTEGER, allowNull: false
+        }
     },
 
-{
-    timestamps: false, tableName: 'Warenkorbinhalt', underscored: false, freezeTableName: true
-})
+    {
+        timestamps: false, tableName: 'Warenkorbinhalt', underscored: false, freezeTableName: true
+    })
+
 function getAll() {
-    return cartContent.findAll()
+    return CartContent.findAll()
 }
 
-async function getCartContentByID(id) {
-        return cartContent.findByPk(id)
+async function getByID(id) {
+    return CartContent.findByPk(id)
 }
 
 function save(cartContent) {
@@ -29,13 +31,13 @@ function save(cartContent) {
 }
 
 function removeByID(id) {
-    return cartContent.destroy({
+    return CartContent.destroy({
         where: {
-            cartContentID: id
+            warenkorbinhaltID: id
         }
     })
 }
 
 export {
-    getCartContentByID, getAll, save, removeByID
+    getByID, getAll, save, removeByID
 }

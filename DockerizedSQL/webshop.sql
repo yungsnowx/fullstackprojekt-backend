@@ -68,10 +68,11 @@ CREATE TABLE `Warenkorb` (
 -- Tabellenstruktur für Tabelle "Warenkorbinhalt"
 
 CREATE TABLE `Warenkorbinhalt` (
+  `warenkorbinhaltID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `warenkorbID` int(10) UNSIGNED NOT NULL,
   `produktID` int(10) UNSIGNED NOT NULL,
   `anzahl` int(11) NOT NULL,
-  PRIMARY KEY(warenkorbID, produktID)
+  PRIMARY KEY(warenkorbinhaltID)
 );
 
 -- Fremdschlüssel
@@ -178,15 +179,15 @@ INSERT INTO `Warenkorb` (userID) VALUES (2);
 
 -- Für Warenkorbinhalt
 
-INSERT INTO `Warenkorbinhalt` VALUES (1, 1, 5);
+INSERT INTO `Warenkorbinhalt` VALUES (1, 1, 1, 5);
 
-INSERT INTO `Warenkorbinhalt` VALUES (2, 2, 2);
+INSERT INTO `Warenkorbinhalt` VALUES (2, 2, 2, 2);
 
-INSERT INTO `Warenkorbinhalt` VALUES (3, 3, 2);
+INSERT INTO `Warenkorbinhalt` VALUES (3, 3, 3, 2);
 
-INSERT INTO `Warenkorbinhalt` VALUES (3, 2, 1);
+INSERT INTO `Warenkorbinhalt` VALUES (4, 3, 2, 1);
 
-INSERT INTO `Warenkorbinhalt` VALUES (4, 1, 1);
+INSERT INTO `Warenkorbinhalt` VALUES (5, 4, 1, 1);
 
 -- Für Bestellung
 
