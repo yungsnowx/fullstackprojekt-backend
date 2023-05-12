@@ -1,7 +1,5 @@
 import {sequelize} from "../config/db.js"
 import {DataTypes, where} from "sequelize"
-import {User} from "./userModel.js"
-import {Address} from "./addressModel.js";
 
 const user_Adresse = sequelize.define("Kundenadresse",{
     userID:{
@@ -21,21 +19,17 @@ const user_Adresse = sequelize.define("Kundenadresse",{
         underscored: false,
         freezeTableName: true
     })
-User.hasOne(user_Adresse,{foreignKey:'userID'});
-user_Adresse.belongsTo(User,{foreignKey:"userID"});
 
-Address.hasMany(user_Adresse,{foreignKey:'adresseID'});
-user_Adresse.belongsTo(Address,{foreignKey:"adresseID"});
 function getAll(){
-    return user_Adresse.findAll({include:[User,Address]})
+    return user_Adresse.findAll()
 }
-function getID_User(id){
-    return user_Adresse.findOne({include:[User,Address]},{where:{
+function getByID_User(id){
+    return user_Adresse.findOne({where:{
         userID:id
         }});
 }
 function getID_Address(id){
-    return user_Adresse.findOne({include:[User,Address]},{where:{
+    return user_Adresse.findOne({where:{
             addressID:id
         }});
 }
@@ -51,5 +45,5 @@ function deleteID(userID,addressID){
         }})
 }
 export {
-    getAll,getID_User,getID_Address,save,create,deleteID
+    getAll,getByID_User,getID_Address,save,create,deleteID
 }

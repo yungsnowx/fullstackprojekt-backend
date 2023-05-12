@@ -1,5 +1,5 @@
 import {sequelize} from "../config/db.js"
-import {DataTypes} from "sequelize"
+import {DataTypes, where} from "sequelize"
 
 const User = sequelize.define("User", {
     userID: {
@@ -22,7 +22,12 @@ const User = sequelize.define("User", {
 function getAll() {
     return User.findAll()
 }
-
+function  getByID(id){
+    return User.findOne({where:
+            {
+                userID:id
+            }})
+}
 function getByEmail(email) {
     return User.findOne({
         where: {email: email}
@@ -48,5 +53,5 @@ function removeByID(id) {
 }
 
 export {
-    getAll, getByEmail, save, saveWithoutPassword, removeByID,User
+    getAll,getByID,getByEmail, save, saveWithoutPassword, removeByID
 }
