@@ -48,5 +48,5 @@ function removeByID(id) {
 }
 
 export {
-    getAll, getByEmail, save, saveWithoutPassword, removeByID
+    getAll, getByEmail, save, saveWithoutPassword, removeByID,User
 }
