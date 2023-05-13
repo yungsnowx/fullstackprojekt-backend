@@ -5,7 +5,7 @@ async function getAllProductsAction(request, response) {
     response.json(product)
 }
 
-async function getProductByIDAction(request, response) {
+async function getProductByIdAction(request, response) {
     let id = request.params.id
     let product = await getByID(id)
     response.json(product)
@@ -23,7 +23,7 @@ async function updateProductAction(request, response) {
     response.json()
 }
 
-async function deleteProductByIDAction(request, response) {
+async function deleteProductByIdAction(request, response) {
     let id = request.params.id
     await removeByID(id)
     response.json()
@@ -46,8 +46,8 @@ function readProductFromRequest(request) {
 
 export {
     getAllProductsAction,
-    getProductByIDAction,
+    getProductByIdAction,
     addProductAction,
     updateProductAction,
-    deleteProductByIDAction
+    deleteProductByIdAction
 }

@@ -1,15 +1,19 @@
 import {Router} from "express"
 import {
-    getAllcartContentsAction, getCartContentByIDAction, addcartContentAction, updatecartContentAction, deletecartContentByIDAction
+    getAllCartContentsAction,
+    getCartContentByIDAction,
+    addCartContentAction,
+    updateCartContentAction,
+    deleteCartContentByIDAction
 } from "../controllers/cartContentController.js"
 
 const router = Router()
-const routename = 'warenkorbInhalt'
+const routeName = 'warenkorbinhalt'
 
-router.get(`/${routename}`, getAllcartContentsAction)
-router.get(`/${routename}/:id`, getCartContentByIDAction)
-router.post(`/${routename}`, addcartContentAction)
-router.put(`/${routename}`, updatecartContentAction)
-router.delete(`/${routename}/:id`, deletecartContentByIDAction)
+router.get(`/${routeName}`, getAllCartContentsAction)
+router.get(`/${routeName}/:id`, getCartContentByIDAction)
+router.post(`/${routeName}`, addCartContentAction)
+router.put(`/${routeName}`, updateCartContentAction)
+router.delete(`/${routeName}/:id`, deleteCartContentByIDAction)
 
 export {router}

@@ -1,15 +1,19 @@
 import Router from 'express'
 import {
-    getAllProductsAction, getProductByIDAction, addProductAction, updateProductAction, deleteProductByIDAction
+    getAllProductsAction,
+    getProductByIdAction,
+    addProductAction,
+    updateProductAction,
+    deleteProductByIdAction
 } from "../controllers/productController.js"
 
 const router = Router()
-const routename = 'produkt'
+const routeName = 'produkt'
 
-router.get(`/${routename}`, getAllProductsAction)
-router.get(`/${routename}/:id`, getProductByIDAction)
-router.post(`/${routename}`, addProductAction)
-router.put(`/${routename}`, updateProductAction)
-router.delete(`/${routename}/:id`, deleteProductByIDAction)
+router.get(`/${routeName}`, getAllProductsAction)
+router.get(`/${routeName}/:id`, getProductByIdAction)
+router.post(`/${routeName}`, addProductAction)
+router.put(`/${routeName}`, updateProductAction)
+router.delete(`/${routeName}/:id`, deleteProductByIdAction)
 
 export {router}

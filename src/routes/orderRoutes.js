@@ -1,15 +1,19 @@
 import {Router} from "express"
 import {
-    getAllOrdersAction, getOrderByIDAction, addOrderAction, updateOrderAction, deleteOrderByIDAction
+    getAllOrdersAction,
+    getOrderByIdAction,
+    addOrderAction,
+    updateOrderAction,
+    deleteOrderByIdAction
 } from "../controllers/orderController.js"
 
 const router = Router()
-const routename = 'bestellung'
+const routeName = 'bestellung'
 
-router.get(`/${routename}`, getAllOrdersAction)
-router.get(`/${routename}/:id`, getOrderByIDAction)
-router.post(`/${routename}`, addOrderAction)
-router.put(`/${routename}`, updateOrderAction)
-router.delete(`/${routename}/:id`, deleteOrderByIDAction)
+router.get(`/${routeName}`, getAllOrdersAction)
+router.get(`/${routeName}/:id`, getOrderByIdAction)
+router.post(`/${routeName}`, addOrderAction)
+router.put(`/${routeName}`, updateOrderAction)
+router.delete(`/${routeName}/:id`, deleteOrderByIdAction)
 
 export {router}

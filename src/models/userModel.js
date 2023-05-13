@@ -1,5 +1,5 @@
 import {sequelize} from "../config/db.js"
-import {DataTypes, where} from "sequelize"
+import {DataTypes} from "sequelize"
 
 const User = sequelize.define("User", {
     userID: {
@@ -22,12 +22,15 @@ const User = sequelize.define("User", {
 function getAll() {
     return User.findAll()
 }
-function  getByID(id){
-    return User.findOne({where:
-            {
-                userID:id
-            }})
+
+function getByID(id) {
+    return User.findOne({
+        where: {
+            userID: id
+        }
+    })
 }
+
 function getByEmail(email) {
     return User.findOne({
         where: {email: email}
@@ -40,9 +43,7 @@ function save(user) {
 
 function saveWithoutPassword(user) {
     return User.update({
-        vorname: user.vorname,
-        nachname: user.nachname,
-        email: user.email
+        vorname: user.vorname, nachname: user.nachname, email: user.email
     }, {where: {userID: user.userID}})
 }
 
@@ -53,5 +54,5 @@ function removeByID(id) {
 }
 
 export {
-    getAll,getByID,getByEmail, save, saveWithoutPassword, removeByID
+    getAll, getByID, getByEmail, save, saveWithoutPassword, removeByID
 }

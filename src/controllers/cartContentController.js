@@ -1,46 +1,51 @@
-import {getCartContentByID, getAll, removeByID, save} from '../models/cartContentModel.js'
+import {getByID, getAll, removeByID, save} from '../models/cartContentModel.js'
 
-async function getAllcartContentsAction(request, response) {
+async function getAllCartContentsAction(request, response) {
     let cartContent = await getAll()
     response.json(cartContent)
 }
 
 async function getCartContentByIDAction(request, response) {
     let id = request.params.id
-    let cartContent = await getCartContentByID(id)
+    let cartContent = await getByID(id)
     response.json(cartContent)
 }
 
-async function addcartContentAction(request, response) {
-    let jsonObject = readOrderFromRequest(request)
+async function addCartContentAction(request, response) {
+    let jsonObject = readCartContentFromRequest(request)
     await save(jsonObject)
     response.json()
 }
 
-async function updatecartContentAction(request, response) {
-    let jsonObject = readOrderFromRequest(request)
+async function updateCartContentAction(request, response) {
+    let jsonObject = readCartContentFromRequest(request)
     await save(jsonObject)
     response.json()
 }
 
-async function deletecartContentByIDAction(request, response) {
+async function deleteCartContentByIDAction(request, response) {
     let id = request.params.id
     await removeByID(id)
     response.json()
 }
 
-function readOrderFromRequest(request) {
+function readCartContentFromRequest(request) {
     let body = request.body
-    let warenkorbInhaltID = body.warenkorbInhaltID
+    let warenkorbInhaltID = body.warenkorbinhaltID
+    let warenkorbID = body.warenkorbID
     let userID = body.userID
 
-
     return {
-        'warenkorbInhaltID': warenkorbInhaltID,
+        'warenkorbinhaltID': warenkorbInhaltID,
+        'warenkorbID': warenkorbID,
         'userID': userID
     }
 }
 
 export {
-    getAllcartContentsAction, getCartContentByIDAction, addcartContentAction, updatecartContentAction, deletecartContentByIDAction
+    getAllCartContentsAction,
+    getCartContentByIDAction,
+    addCartContentAction,
+    updateCartContentAction,
+    deleteCartContentByIDAction
 }

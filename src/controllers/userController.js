@@ -39,7 +39,7 @@ async function updateUserAction(request, response) {
     response.json()
 }
 
-async function deleteUserByIDAction(request, response) {
+async function deleteUserByIdAction(request, response) {
     let id = request.params.id
     await removeByID(id)
     response.json()
@@ -65,5 +65,5 @@ function readUserFromRequest(request) {
 }
 
 export {
-    getAllUsersAction, getUserByEmailAction, loginUserAction, addUserAction, updateUserAction, deleteUserByIDAction
+    getAllUsersAction, getUserByEmailAction, loginUserAction, addUserAction, updateUserAction, deleteUserByIdAction
 }
