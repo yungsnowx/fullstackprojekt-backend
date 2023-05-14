@@ -1,4 +1,7 @@
 import {getByID, getAll, removeByID, save} from '../models/cartContentModel.js'
+import {getByID as getAddressByID} from "../models/addressModel.js";
+import {getByID as getProductByID} from "../models/productModel.js";
+
 
 async function getAllCartContentsAction(request, response) {
     let cartContent = await getAll()
@@ -8,7 +11,19 @@ async function getAllCartContentsAction(request, response) {
 async function getCartContentByIDAction(request, response) {
     let id = request.params.id
     let cartContent = await getByID(id)
-    response.json(cartContent)
+
+    let warenkorb = await getAddressByID(cartContent.warenkorbID)
+    let produkt = await getProductByID(cartContent.produktID)
+
+    let combinedJson = {
+        'warenkorbinhaltID': cartContent.warenkorbinhaltID,
+        'warenkorbID': warenkorb,
+        'produktID': produkt,
+        'anzahl': cartContent.anzahl
+    }
+
+
+    response.json(combinedJson)
 }
 
 async function addCartContentAction(request, response) {
