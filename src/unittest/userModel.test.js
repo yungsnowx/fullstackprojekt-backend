@@ -30,20 +30,6 @@ User.removeByID = jest.mocked(() =>{
     return expecteddeletedUser;
 })
 
-// getByEmail = jest.mocked(() =>{
-//     return expectedIdUser
-// })
-
-
-const user =
-    {
-        userID: 1,
-        vorname:"Dimitrios",
-        nachname:"Chalatsoglou",
-        email:"chalatsoglou-dimitrios@web.de"
-    };
-
-saveWithoutPassword(user);
 
 describe('User',() =>{
     it("should get all User", async () =>{
@@ -99,8 +85,6 @@ describe('User',() =>{
             };
         const output = await User.save(user);
         expect(output).toStrictEqual(expectedUpdateUser);
-
-
     })
 });
 
