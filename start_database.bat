@@ -12,7 +12,7 @@ if errorlevel 1 (
     goto loop
 )
 
-echo Docker ist bereit!
+echo Docker ist bereit
 
 echo Image wird erstellt...
 
@@ -22,4 +22,4 @@ echo Datenbank wird hochgefahren...
 
 docker run --name "MariaDB" -d -p 3306:3306 database_container:latest
 
-echo Datenbank ist bereit!
+echo Datenbank ist bereit
