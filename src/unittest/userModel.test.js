@@ -100,6 +100,7 @@ describe('User',() =>{
         const output = await User.save(user);
         expect(output).toStrictEqual(expectedUpdateUser);
 
+
     })
 });
 
