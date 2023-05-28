@@ -1,5 +1,5 @@
 import {it,expect,describe} from "@jest/globals"
-import {getByEmail,saveWithoutPassword, User} from "../models/userModel.js";
+import {User} from "../models/userModel.js";
 
 
 const expectedUser =
@@ -14,7 +14,9 @@ const expectedUpdateUser =
     '[{"userID":1,"vorname":"Marcel","nachname":"Chalatsoglou","email":"chalatsoglou-dimitrios@web.de","passwort":"ilovejenniferaniston","isAdmin":true}'
 const expecteddeletedUser =
     '[{"userID":1,"vorname":"Marcel","nachname":"Chalatsoglou","email":"chalatsoglou-dimitrios@web.de","passwort":"ilovejenniferaniston","isAdmin":true}'
-const expectedupdateUser_0 = [1]
+
+const expectedsave_withoutpassword =
+    '[{"userID":1,"vorname":"Marcel","nachname":"Chalatsoglou_12","email":"chalatsoglou-dimitrios@web.de","passwort":"ilovejenniferaniston","isAdmin":true}'
 
 User.getAll = jest.mocked(() => {
     return expectedUser;
@@ -30,7 +32,12 @@ User.removeByID = jest.mocked(() =>{
     return expecteddeletedUser;
 })
 
-
+User.saveWithoutPassword = jest.mocked(() =>{
+    return expectedsave_withoutpassword
+})
+User.getByEmail = jest.mocked(() =>{
+    return expectedIdUser
+})
 describe('User',() =>{
     it("should get all User", async () =>{
         const output = await User.getAll();
@@ -43,8 +50,8 @@ describe('User',() =>{
     })
     it("should get a User", async () =>{
         const  email = "chalatsoglou-dimitrios@web.de"
-        const output = await getByEmail(email);
-        expect(JSON.stringify(output.dataValues)).toStrictEqual(expectedIdUser);
+        const output = await User.getByEmail(email);
+        expect(output).toStrictEqual(expectedIdUser);
     })
     it ("should update a user with an id",async () =>{
         const user =
@@ -55,18 +62,8 @@ describe('User',() =>{
                 email:"chalatsoglou-dimitrios@web.de"
             };
 
-        const output =  await saveWithoutPassword(user);
-        expect(output).toStrictEqual(expectedupdateUser_0);
-        const user_0 =
-            {
-                userID: 1,
-                vorname:"Dimitrios",
-                nachname:"Chalatsoglou",
-                email:"chalatsoglou-dimitrios@web.de"
-            };
-        const output_  = await  saveWithoutPassword(user_0)
-
-
+        const output =  await User.saveWithoutPassword(user);
+        expect(output).toStrictEqual(expectedsave_withoutpassword)
     })
 
     it("should delete a User",async () =>{
