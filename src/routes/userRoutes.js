@@ -6,9 +6,12 @@ import {
   loginUserAction,
   updateUserAction,
 } from "../controllers/userController.js";
+import bodyParser from "body-parser";
 
 const router = Router();
 const routeName = "users";
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: false }));
 
 router.get(`/${routeName}`, getAllUsersAction);
 router.post(`/${routeName}/log_in`, loginUserAction);
