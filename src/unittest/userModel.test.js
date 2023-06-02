@@ -1,4 +1,4 @@
-import {it,expect,describe} from "@jest/globals"
+import {it,expect,describe, jest} from "@jest/globals"
 import {User} from "../models/userModel.js";
 
 
