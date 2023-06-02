@@ -42,7 +42,7 @@ CREATE TABLE `Produkt` (
   `produktname` varchar(50) NOT NULL,
   `produktbeschreibung` text DEFAULT NULL,
   `preis` decimal(10,2) NOT NULL,
-    `bild` varchar(100) NOT NULL,
+  `bild` varchar(100),
   PRIMARY KEY(produktID)
 );
 

@@ -20,6 +20,10 @@ const Product = sequelize.define(
     preis: {
       type: DataTypes.DOUBLE,
     },
+    bild: {
+        type: DataTypes.STRING,
+    },
+
   },
   {
     timestamps: false,

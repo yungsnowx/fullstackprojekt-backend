@@ -35,12 +35,14 @@ function readProductFromRequest(request) {
   let produktname = body.produktname;
   let produktbeschreibung = body.produktbeschreibung;
   let preis = body.preis;
+  let bild = body.bild;
 
   return {
     produktID: produktID,
     produktname: produktname,
     produktbeschreibung: produktbeschreibung,
     preis: preis,
+    bild: bild,
   };
 }
 
