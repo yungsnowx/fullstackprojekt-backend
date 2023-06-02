@@ -42,6 +42,7 @@ CREATE TABLE `Produkt` (
   `produktname` varchar(50) NOT NULL,
   `produktbeschreibung` text DEFAULT NULL,
   `preis` decimal(10,2) NOT NULL,
+    `bild` varchar(100) NOT NULL,
   PRIMARY KEY(produktID)
 );
 
@@ -62,6 +63,7 @@ CREATE TABLE `User` (
 CREATE TABLE `Warenkorb` (
   `warenkorbID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `userID` int(11) UNSIGNED NOT NULL,
+  `istAktiv` tinyint(1) DEFAULT 1,
   PRIMARY KEY(warenkorbID)
 );
 

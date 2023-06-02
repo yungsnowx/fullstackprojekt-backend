@@ -1,19 +1,19 @@
-import {Router} from "express"
+import { Router } from "express";
 import {
-    getAllCartsAction,
-    getCartByIdAction,
-    addCartAction,
-    updateCartAction,
-    deleteCartByIdAction
-} from "../controllers/cartController.js"
+  addCartAction,
+  deleteCartByIdAction,
+  getAllCartsAction,
+  getCartByIdAction,
+  updateCartAction,
+} from "../controllers/cartController.js";
 
-const router = Router()
-const routeName = 'warenkorb'
+const router = Router();
+const routeName = "warenkorb";
 
-router.get(`/${routeName}`, getAllCartsAction)
-router.get(`/${routeName}/:id`, getCartByIdAction)
-router.post(`/${routeName}`, addCartAction)
-router.put(`/${routeName}`, updateCartAction)
-router.delete(`/${routeName}/:id`, deleteCartByIdAction)
+router.get(`/${routeName}`, getAllCartsAction);
+router.get(`/${routeName}/:id`, getCartByIdAction);
+router.post(`/${routeName}`, addCartAction);
+router.put(`/${routeName}`, updateCartAction);
+router.delete(`/${routeName}/:id`, deleteCartByIdAction);
 
-export {router}
+export { router };
