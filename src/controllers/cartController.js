@@ -1,4 +1,4 @@
-import { getAll, getByID, removeByID, save } from "../models/cartModel.js";
+import { getAll, getByID, removeByID, save, getActiveByUserId } from "../models/cartModel.js";
 
 async function getAllCartsAction(request, response) {
   let carts = await getAll();
@@ -10,6 +10,13 @@ async function getCartByIdAction(request, response) {
   let cart = await getByID(id);
   response.json(cart);
 }
+
+export async function getActiveCartByUserIdAction(request, response) {
+    let id = request.params.id;
+    let cart = await getActiveByUserId(id);
+    response.json(cart);
+}
+
 
 async function addCartAction(request, response) {
   let jsonObject = readCartFromRequest(request);
@@ -33,10 +40,12 @@ function readCartFromRequest(request) {
   let body = request.body;
   let warenkorbID = body.warenkorbID;
   let userID = body.userID;
+  let istAktiv = body.istAktiv;
 
   return {
     warenkorbID: warenkorbID,
     userID: userID,
+    istAktiv: istAktiv,
   };
 }
 

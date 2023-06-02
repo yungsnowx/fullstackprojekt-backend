@@ -15,6 +15,10 @@ const Cart = sequelize.define(
       allowNull: false,
       foreignKey: true,
     },
+    istAktiv: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
   },
   {
     timestamps: false,
@@ -40,6 +44,15 @@ function getByUserId(id) {
   });
 }
 
+function getActiveByUserId(id) {
+  return Cart.findOne({
+    where: {
+      userID: id,
+      istAktiv: true,
+    },
+  });
+}
+
 function save(cart) {
   return Cart.upsert(cart);
 }
@@ -52,4 +65,4 @@ function removeByID(id) {
   });
 }
 
-export { getByID, getByUserId, getAll, save, removeByID };
+export { getByID, getByUserId, getAll, save, removeByID, getActiveByUserId};
