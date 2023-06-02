@@ -144,14 +144,23 @@ VALUES ("Aschkobar", "die Nummer Eins", "asche@gmail.com", "wasbleibtistasche", 
 
 -- Für Produkt
 
-INSERT INTO `Produkt` (produktname, produktbeschreibung, preis)
-VALUES ("MacBookAir", "MacBook Air 2023 mit Apple M2-Chip, 16GB RAM, 256GB SSD" , 1699.99);
+INSERT INTO `Produkt` (produktname, produktbeschreibung, preis, bild)
+VALUES ("MaMa Mia", "Mango-Maracuja-Schorle" , 3.49, "../images/MangoMaracuja.png");
 
-INSERT INTO `Produkt` (produktname, produktbeschreibung, preis)
-VALUES ("Fitnesshantel", "Fitnesshantel 28kg Leichtmetall" , 14.99);
+INSERT INTO `Produkt` (produktname, produktbeschreibung, preis, bild)
+VALUES ("Sour Cherry", "Apfel-Kirsch-Schorle" , 3.49, "../images/ApfelKirsch.png");
 
-INSERT INTO `Produkt` (produktname, produktbeschreibung, preis)
-VALUES ("Cabanossis-Käse", "Cabanossis mit Käsegeschmack 500g" , 3.99);
+INSERT INTO `Produkt` (produktname, produktbeschreibung, preis, bild)
+VALUES ("Red Wild", "Beerenmix-Schorle" , 3.49, "../images/Beerenmix.png");
+
+INSERT INTO `Produkt` (produktname, produktbeschreibung, preis, bild)
+VALUES ("Gold Lime", "Ginger Ale-Schorle mit Limettenschuss" , 3.49, "../images/GingerAleLimette.png");
+
+INSERT INTO `Produkt` (produktname, produktbeschreibung, preis, bild)
+VALUES ("Juicy Grenade", "Organgen-Granatapfel-Schorle" , 3.49, "../images/OrgangeGranatapfel.png");
+
+INSERT INTO `Produkt` (produktname, produktbeschreibung, preis, bild)
+VALUES ("Mint Hint", "Zitronenlimonade mit frischer Minze" , 3.49, "../images/ZitroneMinze.png");
 
 -- Für Kundenadresse
 
