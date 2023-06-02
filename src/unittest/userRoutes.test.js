@@ -1,5 +1,5 @@
 import request from "supertest";
-import {router} from "./routes/userRoutes.js";
+import {router} from "../routes/userRoutes.js";
 
 
 //TODO: Nachfragen wie man hier einen Mock erstellt damit nicht immer die Datenbank angesprochen wird
