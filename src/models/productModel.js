@@ -1,5 +1,5 @@
-import { sequelize } from "../config/db.js";
 import { DataTypes } from "sequelize";
+import { sequelize } from "../config/db.js";
 
 const Product = sequelize.define(
   "Produkt",
@@ -21,9 +21,8 @@ const Product = sequelize.define(
       type: DataTypes.DOUBLE,
     },
     bild: {
-        type: DataTypes.STRING,
+      type: DataTypes.STRING,
     },
-
   },
   {
     timestamps: false,

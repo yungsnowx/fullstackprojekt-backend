@@ -1,10 +1,11 @@
+import { getByID as getAddressByID } from "../models/addressModel.js";
 import {
   getAll,
+  getByCartId,
   getByID,
   removeByID,
   save,
 } from "../models/cartContentModel.js";
-import { getByID as getAddressByID } from "../models/addressModel.js";
 import { getByID as getProductByID } from "../models/productModel.js";
 
 async function getAllCartContentsAction(request, response) {
@@ -27,6 +28,19 @@ async function getCartContentByIDAction(request, response) {
   };
 
   response.json(combinedJson);
+}
+
+async function getCartContentByCartIDAction(request, response) {
+  let id = request.params.id;
+  let cartContent = await getByCartId(id);
+
+  // combine product model with cartContent model
+  for (let i = 0; i < cartContent.length; i++) {
+    let product = await getProductByID(cartContent[i].produktID);
+    cartContent[i].produktID = product;
+  }
+
+  response.json(cartContent);
 }
 
 async function addCartContentAction(request, response) {
@@ -63,6 +77,7 @@ function readCartContentFromRequest(request) {
 export {
   getAllCartContentsAction,
   getCartContentByIDAction,
+  getCartContentByCartIDAction,
   addCartContentAction,
   updateCartContentAction,
   deleteCartContentByIDAction,
