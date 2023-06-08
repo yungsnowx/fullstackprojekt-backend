@@ -1,5 +1,5 @@
-import { sequelize } from "../config/db.js";
 import { DataTypes } from "sequelize";
+import { sequelize } from "../config/db.js";
 
 const CartContent = sequelize.define(
   "Warenkorbinhalt",
@@ -43,6 +43,14 @@ async function getByID(id) {
   return CartContent.findByPk(id);
 }
 
+async function getByCartId(id) {
+  return CartContent.findAll({
+    where: {
+      warenkorbID: id,
+    },
+  });
+}
+
 function save(cartContent) {
   return CartContent.upsert(cartContent);
 }
@@ -55,4 +63,4 @@ function removeByID(id) {
   });
 }
 
-export { getByID, getAll, save, removeByID };
+export { getByID, getByCartId, getAll, save, removeByID };
