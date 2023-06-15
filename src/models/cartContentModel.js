@@ -51,8 +51,20 @@ async function getByCartId(id) {
   });
 }
 
-function save(cartContent) {
-  return CartContent.upsert(cartContent);
+function update(cartContent) {
+  console.log(cartContent)
+
+  return CartContent.update(
+    cartContent,
+    {
+      where:{
+      warenkorbinhaltID: cartContent.warenkorbinhaltID
+    }}
+    );
+}
+
+function save(cartContent){
+  return CartContent.create(cartContent)
 }
 
 function removeByID(id) {
@@ -63,4 +75,4 @@ function removeByID(id) {
   });
 }
 
-export { getByID, getByCartId, getAll, save, removeByID };
+export { getByID, getByCartId, getAll, save,update, removeByID };

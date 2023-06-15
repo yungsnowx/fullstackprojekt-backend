@@ -5,6 +5,7 @@ import {
   getByID,
   removeByID,
   save,
+  update
 } from "../models/cartContentModel.js";
 import { getByID as getProductByID } from "../models/productModel.js";
 
@@ -51,7 +52,7 @@ async function addCartContentAction(request, response) {
 
 async function updateCartContentAction(request, response) {
   let jsonObject = readCartContentFromRequest(request);
-  await save(jsonObject);
+  await update(jsonObject);
   response.json();
 }
 
@@ -65,12 +66,16 @@ function readCartContentFromRequest(request) {
   let body = request.body;
   let warenkorbInhaltID = body.warenkorbinhaltID;
   let warenkorbID = body.warenkorbID;
-  let userID = body.userID;
+  //let userID = body.userID;
+  let produktID = body.produktID;;
+  let anzahl = body.anzahl;
 
   return {
     warenkorbinhaltID: warenkorbInhaltID,
     warenkorbID: warenkorbID,
-    userID: userID,
+    produktID: produktID,
+    anzahl: anzahl
+    //userID: userID,
   };
 }
 
