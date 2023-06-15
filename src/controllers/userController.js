@@ -15,9 +15,9 @@ async function getUserByEmailAction(request, response) {
 async function loginUserAction(request, response) {
     let email = request.body.email;
     let user = await getByEmail(email);
-
-    if (bcrypt.compareSync(user.passwort, request.body.passwort)) {
-        response.status(201).json({message: "Success"});
+    //bcrypt.compareSync(user.passwort, request.body.passwort)
+    if (user.passwort === request.body.passwort) {
+        response.status(201).json(user);
     } else {
         response.status(401).json({message: "passwort not correct"});
     }
