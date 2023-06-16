@@ -54,13 +54,8 @@ async function getByCartId(id) {
 function update(cartContent) {
   console.log(cartContent)
 
-  return CartContent.update(
-    cartContent,
-    {
-      where:{
-      warenkorbinhaltID: cartContent.warenkorbinhaltID
-    }}
-    );
+  return CartContent.upsert(
+    cartContent);
 }
 
 function save(cartContent){

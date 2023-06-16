@@ -46,7 +46,7 @@ async function getCartContentByCartIDAction(request, response) {
 
 async function addCartContentAction(request, response) {
   let jsonObject = readCartContentFromRequest(request);
-  await save(jsonObject);
+  await update(jsonObject);
   response.json();
 }
 
