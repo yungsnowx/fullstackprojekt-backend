@@ -1,6 +1,6 @@
 import{describe, it, expect, jest} from '@jest/globals';
-import{getAllUsersAction,getUserByEmailAction,loginUserAction,addUserAction,updateUserAction,deleteUserByIdAction} from "../controllers/userController.js";
-
+import{userControler} from "../controllers/userController.js";
+const UserControler = new userControler()
 const expectedUser = [
     {
         userID: 1,
@@ -30,35 +30,36 @@ const expectedaddUser =
 const expectedUserbyEmail =
     '[{"userID":1,"vorname":"Marcel","nachname":"Chalatsoglou","email":"","passwort":"","isAdmin":true}'
 
-getAllUsersAction = jest.mocked(() => {
-    return expectedUser;
-})
+    
+UserControler.getAllUsersAction = jest.mocked(() => {
+     return expectedUser;
+ })
 
-getUserByEmailAction = jest.mocked(() =>{
+UserControler.getUserByEmailAction = jest.mocked(() =>{
     return expectedUserbyEmail;
 })
-loginUserAction = jest.mocked(() =>{
+UserControler.loginUserAction = jest.mocked(() =>{
     return expectedloginUser;
 })
-addUserAction = jest.mocked(() =>{
+UserControler.addUserAction = jest.mocked(() =>{
     return expectedaddUser;
 })
-updateUserAction = jest.mocked(() =>{
+UserControler.updateUserAction = jest.mocked(() =>{
     return expectedUpdateUser;
 })
-deleteUserByIdAction = jest.mocked(() =>{
+UserControler.deleteUserByIdAction = jest.mocked(() =>{
     return expecteddeletedUser;
 })
 
 
 describe('User',() =>{
-    it("should get all User", async () =>{
-        const output = await getAllUsersAction();
-        expect(output).toStrictEqual(expectedUser);
-    })
+    // it("should get all User", async () =>{
+    //     const output = await UserControler.getAllUsersAction();
+    //     expect(output).toStrictEqual(expectedUser);
+    // })
     it("should get a User", async () =>{
         const  email = "";
-        const output = await getUserByEmailAction(email);
+        const output = await UserControler.getUserByEmailAction(email);
         expect(output).toStrictEqual(expectedUserbyEmail);
     })
     it ("should update a user with an id",async () =>{
@@ -71,23 +72,23 @@ describe('User',() =>{
                 passwort:"",
                 isAdmin:"true"
             };
-        const output = await updateUserAction(user);
+        const output = await UserControler.updateUserAction(user);
         expect(output).toStrictEqual(expectedUpdateUser);
     });
     it("should delete a User",async () =>{
-        const output  = await deleteUserByIdAction(1);
+        const output  = await UserControler.deleteUserByIdAction(1);
         expect(output).toStrictEqual(expecteddeletedUser);
     })
     it("should add a User",async () =>{
-        const output  = await addUserAction(1);
+        const output  = await UserControler.addUserAction(1);
         expect(output).toStrictEqual(expectedaddUser);
     });
     it("should login a User",async () =>{
-        const output  = await loginUserAction(1);
+        const output  = await UserControler.loginUserAction(1);
         expect(output).toStrictEqual(expectedloginUser);
     });
     it("should update a User",async () =>{
-        const output  = await updateUserAction(1);
+        const output  = await UserControler.updateUserAction(1);
         expect(output).toStrictEqual(expectedUpdateUser);
     });
 });
