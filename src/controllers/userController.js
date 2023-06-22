@@ -1,29 +1,37 @@
-import {getAll, getByEmail, removeByID, save, saveWithoutPassword,} from "../models/userModel.js";
+import {
+  getAll,
+  getByEmail,
+  removeByID,
+  save,
+  saveWithoutPassword,
+} from "../models/userModel.js";
 import bcrypt from "bcrypt";
 
-async function getAllUsersAction(request, response) {
+export class UserController {
+  userController() {}
+  async getAllUsersAction(request, response) {
     let users = await getAll();
     response.json(users);
-}
+  }
 
-async function getUserByEmailAction(request, response) {
+  async getUserByEmailAction(request, response) {
     let email = request.body.email;
     let user = await getByEmail(email);
     response.json(user);
-}
+  }
 
-async function loginUserAction(request, response) {
+  async loginUserAction(request, response) {
     let email = request.body.email;
     let user = await getByEmail(email);
-
-    if (bcrypt.compareSync(user.passwort, request.body.passwort)) {
-        response.status(201).json({message: "Success"});
+    //bcrypt.compareSync(user.passwort, request.body.passwort)
+    if (user.passwort === request.body.passwort) {
+      response.status(201).json(user);
     } else {
-        response.status(401).json({message: "passwort not correct"});
+      response.status(401).json({ message: "passwort not correct" });
     }
-}
+  }
 
-async function addUserAction(request, response) {
+  async addUserAction(request, response) {
     let jsonObject = readUserFromRequest(request);
 
     jsonObject.passwort = bcrypt.hashSync(jsonObject.passwort, 10);
@@ -31,22 +39,22 @@ async function addUserAction(request, response) {
 
     await save(jsonObject);
     response.json();
-}
+  }
 
-async function updateUserAction(request, response) {
+  async updateUserAction(request, response) {
     let jsonObject = readUserFromRequest(request);
     let updatedUser = await getByEmail(jsonObject.email);
     await saveWithoutPassword(jsonObject);
     response.send(updatedUser);
-}
+  }
 
-async function deleteUserByIdAction(request, response) {
+  async deleteUserByIdAction(request, response) {
     let id = request.params.id;
     await removeByID(id);
     response.json();
-}
+  }
 
-function readUserFromRequest(request) {
+  readUserFromRequest(request) {
     let body = request.body;
     let userID = body.userID;
     let vorname = body.vorname;
@@ -56,20 +64,12 @@ function readUserFromRequest(request) {
     let isAdmin = body.isAdmin;
 
     return {
-        userID: userID,
-        vorname: vorname,
-        nachname: nachname,
-        email: email,
-        passwort: passwort,
-        isAdmin: isAdmin,
+      userID: userID,
+      vorname: vorname,
+      nachname: nachname,
+      email: email,
+      passwort: passwort,
+      isAdmin: isAdmin,
     };
+  }
 }
-
-export {
-    getAllUsersAction,
-    getUserByEmailAction,
-    loginUserAction,
-    addUserAction,
-    updateUserAction,
-    deleteUserByIdAction,
-};

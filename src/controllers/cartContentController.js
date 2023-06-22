@@ -4,7 +4,7 @@ import {
   getByCartId,
   getByID,
   removeByID,
-  save,
+  save
 } from "../models/cartContentModel.js";
 import { getByID as getProductByID } from "../models/productModel.js";
 
@@ -65,12 +65,15 @@ function readCartContentFromRequest(request) {
   let body = request.body;
   let warenkorbInhaltID = body.warenkorbinhaltID;
   let warenkorbID = body.warenkorbID;
-  let userID = body.userID;
+  let produktID = body.produktID;;
+  let anzahl = body.anzahl;
 
   return {
     warenkorbinhaltID: warenkorbInhaltID,
     warenkorbID: warenkorbID,
-    userID: userID,
+    produktID: produktID,
+    anzahl: anzahl
+    
   };
 }
 

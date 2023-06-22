@@ -52,7 +52,9 @@ async function getByCartId(id) {
 }
 
 function save(cartContent) {
-  return CartContent.upsert(cartContent);
+  return CartContent.upsert(
+    cartContent
+    );
 }
 
 function removeByID(id) {

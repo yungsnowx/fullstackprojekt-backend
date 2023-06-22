@@ -1,4 +1,4 @@
-FROM mariadb:latest
+FROM mariadb:10.11.3
 
 # Setze Umgebungsvariablen für MariaDB
 
