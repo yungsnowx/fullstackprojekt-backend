@@ -1,17 +1,17 @@
 import Router from "express";
-import { userController } from "../controllers/userController.js";
+import { UserController } from "../controllers/userController.js";
 import bodyParser from "body-parser";
-const UserController = new userController();
+const userController = new UserController();
 const router = Router();
 const routeName = "users";
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false }));
 
-router.get(`/${routeName}`, UserController.getAllUsersAction);
-router.post(`/${routeName}/log_in`, UserController.loginUserAction);
-router.post(`/${routeName}/sign_in`, UserController.addUserAction);
-router.post(`/${routeName}`, UserController.addUserAction);
-router.put(`/${routeName}`, UserController.updateUserAction);
-router.delete(`/${routeName}/:id`, UserController.deleteUserByIdAction);
+router.get(`/${routeName}`, userController.getAllUsersAction);
+router.post(`/${routeName}/log_in`, userController.loginUserAction);
+router.post(`/${routeName}/sign_in`, userController.addUserAction);
+router.post(`/${routeName}`, userController.addUserAction);
+router.put(`/${routeName}`, userController.updateUserAction);
+router.delete(`/${routeName}/:id`, userController.deleteUserByIdAction);
 
 export { router };

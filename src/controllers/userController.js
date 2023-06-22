@@ -7,8 +7,8 @@ import {
 } from "../models/userModel.js";
 import bcrypt from "bcrypt";
 
-export class userController {
-  userControler() {}
+export class UserController {
+  userController() {}
   async getAllUsersAction(request, response) {
     let users = await getAll();
     response.json(users);
