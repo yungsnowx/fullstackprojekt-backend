@@ -8,10 +8,6 @@ const User = sequelize.define("User", {
         type: DataTypes.STRING
     }, nachname: {
         type: DataTypes.STRING
-    }, email: {
-        type: DataTypes.STRING, allowNull: false
-    }, passwort: {
-        type: DataTypes.STRING, allowNull: false
     }, isAdmin: {
         type: DataTypes.BOOLEAN, allowNull: false
     }
@@ -31,20 +27,8 @@ function getByID(id) {
     })
 }
 
-function getByEmail(email) {
-    return User.findOne({
-        where: {email: email}
-    })
-}
-
 function save(user) {
     return User.upsert(user)
-}
-
-function saveWithoutPassword(user) {
-    return User.update({
-        vorname: user.vorname, nachname: user.nachname, email: user.email
-    }, {where: {userID: user.userID}})
 }
 
 function removeByID(id) {
@@ -54,5 +38,5 @@ function removeByID(id) {
 }
 
 export {
-    getAll, getByID, getByEmail, save, saveWithoutPassword, removeByID,User
+    getAll, getByID, save, removeByID,User
 }
