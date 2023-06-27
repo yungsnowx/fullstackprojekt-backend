@@ -30,7 +30,7 @@ CREATE TABLE `Bestellung` (
 -- Tabellenstruktur für Tabelle "Kundenadresse"
 
 CREATE TABLE `Kundenadresse` (
-  `userID` int(11) UNSIGNED NOT NULL,
+  `userID` varchar(30) NOT NULL,
   `adresseID` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY(userID, adresseID)
 );
@@ -49,7 +49,7 @@ CREATE TABLE `Produkt` (
 -- Tabellenstruktur für Tabelle "User"
 
 CREATE TABLE `User` (
-  `userID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `userID` varchar(30) NOT NULL,
   `vorname` varchar(30) NOT NULL,
   `nachname` varchar(30) NOT NULL,
   `isAdmin` tinyint(1) DEFAULT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE `User` (
 
 CREATE TABLE `Warenkorb` (
   `warenkorbID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `userID` int(11) UNSIGNED NOT NULL,
+  `userID` varchar(30) NOT NULL,
   `istAktiv` tinyint(1) DEFAULT 1,
   PRIMARY KEY(warenkorbID)
 );
@@ -125,20 +125,29 @@ VALUES ("Treforest Road", 16, "Coventry", "CV3 1FN", "England");
 
 -- Für User
 
-INSERT INTO `User` (vorname, nachname, isAdmin)
-VALUES ("Dimitrios", "Chalatsoglou", 1);
+INSERT INTO `User` (userID, vorname, nachname, isAdmin)
+VALUES ("1", "Dimitrios", "Chalatsoglou", 1);
 
-INSERT INTO `User` (vorname, nachname, isAdmin)
-VALUES ("Leon", "Lovelock", 0);
+INSERT INTO `User` (userID, vorname, nachname, isAdmin)
+VALUES ("2", "Leon", "Lovelock", 0);
 
-INSERT INTO `User` (vorname, nachname, isAdmin)
-VALUES ("Bong", "Tsetepe-Muani", 0);
+INSERT INTO `User` (userID, vorname, nachname, isAdmin)
+VALUES ("3", "Bong", "Tsetepe-Muani", 0);
 
-INSERT INTO `User` (vorname, nachname, isAdmin)
-VALUES ("Adam", "Helpmme", 0);
+INSERT INTO `User` (userID, vorname, nachname, isAdmin)
+VALUES ("4", "Adam", "Helpmme", 0);
 
-INSERT INTO `User` (vorname, nachname, isAdmin)
-VALUES ("Aschkobar", "die Nummer Eins", 0);
+INSERT INTO `User` (userID, vorname, nachname, isAdmin)
+VALUES ("5", "Aschkobar", "die Nummer Eins", 0);
+
+INSERT INTO `User` (userID, vorname, nachname, isAdmin)
+VALUES ("1MQSIfgsdchAZCG23YJWXTei2UL2", "Marcel", "F", 1);
+
+INSERT INTO `User` (userID, vorname, nachname, isAdmin)
+VALUES ("wjBwf8v4RreBYIk4FlYlnVyp9Ih2", "Kaan", "D", 1);
+
+INSERT INTO `User` (userID, vorname, nachname, isAdmin)
+VALUES ("znQcOGQvf2Q1YacafQUd4iozOw32", "Dimitrios", "C", 1);
 
 -- Für Produkt
 
@@ -162,29 +171,29 @@ VALUES ("Mint Hint", "Zitronenlimonade mit frischer Minze" , 3.49, "../images/Zi
 
 -- Für Kundenadresse
 
-INSERT INTO `Kundenadresse` VALUES (1, 1);
+INSERT INTO `Kundenadresse` VALUES ("1", 1);
 
-INSERT INTO `Kundenadresse` VALUES (1, 2);
+INSERT INTO `Kundenadresse` VALUES ("1", 2);
 
-INSERT INTO `Kundenadresse` VALUES (1, 3);
+INSERT INTO `Kundenadresse` VALUES ("1", 3);
 
-INSERT INTO `Kundenadresse` VALUES (2, 4);
+INSERT INTO `Kundenadresse` VALUES ("2", 4);
 
-INSERT INTO `Kundenadresse` VALUES (3, 5);
+INSERT INTO `Kundenadresse` VALUES ("3", 5);
 
-INSERT INTO `Kundenadresse` VALUES (4, 5);
+INSERT INTO `Kundenadresse` VALUES ("4", 5);
 
-INSERT INTO `Kundenadresse` VALUES (5, 4);
+INSERT INTO `Kundenadresse` VALUES ("5", 4);
 
 -- für Warenkorb
 
-INSERT INTO `Warenkorb` (userID) VALUES (1);
+INSERT INTO `Warenkorb` (userID) VALUES ("1");
 
-INSERT INTO `Warenkorb` (userID) VALUES (5);
+INSERT INTO `Warenkorb` (userID) VALUES ("5");
 
-INSERT INTO `Warenkorb` (userID) VALUES (1);
+INSERT INTO `Warenkorb` (userID) VALUES ("1");
 
-INSERT INTO `Warenkorb` (userID) VALUES (2);
+INSERT INTO `Warenkorb` (userID) VALUES ("2");
 
 -- Für Warenkorbinhalt
 

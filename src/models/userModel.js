@@ -3,7 +3,7 @@ import {DataTypes} from "sequelize"
 
 const User = sequelize.define("User", {
     userID: {
-        type: DataTypes.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true
+        type: DataTypes.STRING, primaryKey: true, allowNull: false
     }, vorname: {
         type: DataTypes.STRING
     }, nachname: {
