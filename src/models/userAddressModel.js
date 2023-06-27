@@ -1,7 +1,7 @@
 import { sequelize } from "../config/db.js";
 import { DataTypes } from "sequelize";
 
-const UserAdress = sequelize.define(
+const UserAddress = sequelize.define(
   "Kundenadresse",
   {
     userID: {
@@ -24,11 +24,11 @@ const UserAdress = sequelize.define(
 );
 
 function getAll() {
-  return UserAdress.findAll();
+  return UserAddress.findAll();
 }
 
 function getByUserId(id) {
-  return UserAdress.findOne({
+  return UserAddress.findOne({
     where: {
       userID: id,
     },
@@ -36,7 +36,7 @@ function getByUserId(id) {
 }
 
 function getByAddressId(id) {
-  return UserAdress.findOne({
+  return UserAddress.findOne({
     where: {
       adresseID: id,
     },
@@ -44,11 +44,11 @@ function getByAddressId(id) {
 }
 
 function save(userAddress) {
-  return UserAdress.upsert(userAddress);
+  return UserAddress.upsert(userAddress);
 }
 
 function removeByIDs(userID, addressID) {
-  return UserAdress.destroy({
+  return UserAddress.destroy({
     where: {
       userID: userID,
       addressID: addressID,
