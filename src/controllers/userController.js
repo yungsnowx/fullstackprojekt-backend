@@ -11,6 +11,11 @@ export class UserController {
     let users = await getAll();
     response.json(users);
   }
+  async getUserByIdAction(request, response) {
+    let id = request.params.id;
+    let user = await getByID(id);
+    response.json(user);
+  }
   async addUserAction(request, response) {
     let jsonObject = readUserFromRequest(request);
     jsonObject.isAdmin = false;
