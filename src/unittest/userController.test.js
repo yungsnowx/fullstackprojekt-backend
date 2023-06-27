@@ -17,13 +17,10 @@ const expectedUser = [
 ];
 const expectedUpdateUser =
   '[{"userID":1,"vorname":"Marcel","nachname":"Chalatsogloudos","isAdmin":true}';
-const expecteddeletedUser =
+const expectedDeletedUser =
   '[{"userID":1,"vorname":"Marcel","nachname":"Chalatsoglou","isAdmin":true}';
-const expectedloginUser =
-  '[{"userID":1,"vorname":"Marcel","nachname":"Chalatsoglou","isAdmin":true}';
-const expectedaddUser =
-  '[{"userID":1,"vorname":"Marcel","nachname":"Chalatsoglou","isAdmin":true}';
-const expectedUserbyEmail =
+
+const expectedAddUser =
   '[{"userID":1,"vorname":"Marcel","nachname":"Chalatsoglou","isAdmin":true}';
 
 userController.getAllUsersAction = jest.mocked(() => {
@@ -31,17 +28,16 @@ userController.getAllUsersAction = jest.mocked(() => {
 });
 
 userController.addUserAction = jest.mocked(() => {
-  return expectedaddUser;
+  return expectedAddUser;
 });
 userController.updateUserAction = jest.mocked(() => {
   return expectedUpdateUser;
 });
 userController.deleteUserByIdAction = jest.mocked(() => {
-  return expecteddeletedUser;
+  return expectedDeletedUser;
 });
 
 describe("User", () => {
-
   it("should update a user with an id", async () => {
     const user = {
       userID: 1,
@@ -54,11 +50,11 @@ describe("User", () => {
   });
   it("should delete a User", async () => {
     const output = await userController.deleteUserByIdAction(1);
-    expect(output).toStrictEqual(expecteddeletedUser);
+    expect(output).toStrictEqual(expectedDeletedUser);
   });
   it("should add a User", async () => {
     const output = await userController.addUserAction(1);
-    expect(output).toStrictEqual(expectedaddUser);
+    expect(output).toStrictEqual(expectedAddUser);
   });
   it("should update a User", async () => {
     const output = await userController.updateUserAction(1);
