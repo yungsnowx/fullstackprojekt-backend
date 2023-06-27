@@ -52,8 +52,6 @@ CREATE TABLE `User` (
   `userID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `vorname` varchar(30) NOT NULL,
   `nachname` varchar(30) NOT NULL,
-  `email` varchar(60) NOT NULL UNIQUE,
-  `passwort` varchar(512) NOT NULL,
   `isAdmin` tinyint(1) DEFAULT NULL,
   PRIMARY KEY(userID)
 );
@@ -127,20 +125,20 @@ VALUES ("Treforest Road", 16, "Coventry", "CV3 1FN", "England");
 
 -- Für User
 
-INSERT INTO `User` (vorname, nachname, email, passwort, isAdmin)
-VALUES ("Dimitrios", "Chalatsoglou", "chalatsoglou-dimitrios@web.de", "ilovejenniferaniston", 1);
+INSERT INTO `User` (vorname, nachname, isAdmin)
+VALUES ("Dimitrios", "Chalatsoglou", 1);
 
-INSERT INTO `User` (vorname, nachname, email, passwort, isAdmin)
-VALUES ("Leon", "Lovelock", "lovelock@forlive.de", "vibesitinman", 0);
+INSERT INTO `User` (vorname, nachname, isAdmin)
+VALUES ("Leon", "Lovelock", 0);
 
-INSERT INTO `User` (vorname, nachname, email, passwort, isAdmin)
-VALUES ("Bong", "Tsetepe-Muani", "muani@yahoo.de", "gimmesome", 0);
+INSERT INTO `User` (vorname, nachname, isAdmin)
+VALUES ("Bong", "Tsetepe-Muani", 0);
 
-INSERT INTO `User` (vorname, nachname, email, passwort, isAdmin)
-VALUES ("Adam", "Helpmme", "helpmme@please.uk", "hello", 0);
+INSERT INTO `User` (vorname, nachname, isAdmin)
+VALUES ("Adam", "Helpmme", 0);
 
-INSERT INTO `User` (vorname, nachname, email, passwort, isAdmin)
-VALUES ("Aschkobar", "die Nummer Eins", "asche@gmail.com", "wasbleibtistasche", 0);
+INSERT INTO `User` (vorname, nachname, isAdmin)
+VALUES ("Aschkobar", "die Nummer Eins", 0);
 
 -- Für Produkt
 
