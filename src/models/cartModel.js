@@ -11,7 +11,7 @@ const Cart = sequelize.define(
       autoIncrement: true,
     },
     userID: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       foreignKey: true,
     },
