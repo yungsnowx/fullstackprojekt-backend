@@ -20,7 +20,7 @@ export async function getActiveCartByUserIdAction(request, response) {
 
 
 async function addCartAction(request, response) {
-  if (!request.headers.authorization || !request.headers.authorization.startsWith("Bearer ")) {
+  if (!hasToken(request.headers.authorization)) {
     response.status(403).send("Unauthorized");
     return;
   }
