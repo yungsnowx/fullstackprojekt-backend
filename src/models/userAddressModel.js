@@ -5,7 +5,7 @@ const UserAddress = sequelize.define(
   "Kundenadresse",
   {
     userID: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,
     },
