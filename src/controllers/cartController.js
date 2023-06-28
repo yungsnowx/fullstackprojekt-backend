@@ -1,4 +1,5 @@
-import { getAll, getByID, removeByID, save, getActiveByUserId } from "../models/cartModel.js";
+import {getAll, getByID, removeByID, save, getActiveByUserId} from "../models/cartModel.js";
+import {getAuth} from "firebase-admin/auth";
 
 async function getAllCartsAction(request, response) {
   let carts = await getAll();
@@ -12,22 +13,48 @@ async function getCartByIdAction(request, response) {
 }
 
 export async function getActiveCartByUserIdAction(request, response) {
-    let id = request.params.id;
-    let cart = await getActiveByUserId(id);
-    response.json(cart);
+  let id = request.params.id;
+  let cart = await getActiveByUserId(id);
+  response.json(cart);
 }
 
 
 async function addCartAction(request, response) {
+  if (!request.headers.authorization || !request.headers.authorization.startsWith("Bearer ")) {
+    response.status(403).send("Unauthorized");
+    return;
+  }
   let jsonObject = readCartFromRequest(request);
-  await save(jsonObject);
-  response.json();
+  const token = request.headers.authorization.split(" ")[1];
+  getAuth()
+    .verifyIdToken(token)
+    .then(async (user) => {
+      jsonObject.userID = user.uid;
+      await save(jsonObject);
+      response.json();
+    }).catch((error) => {
+      response.send(error);
+    }
+  );
 }
 
 async function updateCartAction(request, response) {
+  if (!hasToken(request.headers.authorization)) {
+    response.status(403).send("Unauthorized");
+    return;
+  }
   let jsonObject = readCartFromRequest(request);
-  await save(jsonObject);
-  response.json();
+  const token = request.headers.authorization.split(" ")[1];
+  getAuth()
+    .verifyIdToken(token)
+    .then(async (user) => {
+      jsonObject.userID = user.uid;
+      await save(jsonObject);
+      response.json();
+    }).catch((error) => {
+      response.send(error);
+    }
+  );
 }
 
 async function deleteCartByIdAction(request, response) {
@@ -47,6 +74,10 @@ function readCartFromRequest(request) {
     userID: userID,
     istAktiv: istAktiv,
   };
+}
+
+function hasToken(headerAuthorization) {
+  return !headerAuthorization || !headerAuthorization.startsWith("Bearer ")
 }
 
 export {
