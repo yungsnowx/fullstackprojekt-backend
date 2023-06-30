@@ -20,22 +20,9 @@ export async function getActiveCartByUserIdAction(request, response) {
 
 
 async function addCartAction(request, response) {
-  if (!hasToken(request.headers.authorization)) {
-    response.status(403).send("Unauthorized");
-    return;
-  }
   let jsonObject = readCartFromRequest(request);
-  const token = request.headers.authorization.split(" ")[1];
-  getAuth()
-    .verifyIdToken(token)
-    .then(async (user) => {
-      jsonObject.userID = user.uid;
-      await save(jsonObject);
-      response.json();
-    }).catch((error) => {
-      response.send(error);
-    }
-  );
+  let cart = await save(jsonObject);
+  response.json(cart);
 }
 
 async function updateCartAction(request, response) {
@@ -77,7 +64,7 @@ function readCartFromRequest(request) {
 }
 
 function hasToken(headerAuthorization) {
-  return !headerAuthorization || !headerAuthorization.startsWith("Bearer ")
+  return !headerAuthorization || !headerAuthorization.isEmpty() || !headerAuthorization.startsWith("Bearer ")
 }
 
 export {
