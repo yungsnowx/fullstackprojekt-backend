@@ -1,4 +1,3 @@
-import { getByID as getAddressByID } from "../models/addressModel.js";
 import {
   getAll,
   getByCartId,
@@ -6,7 +5,6 @@ import {
   removeByID,
   save
 } from "../models/cartContentModel.js";
-import { getByID as getProductByID } from "../models/productModel.js";
 
 async function getAllCartContentsAction(request, response) {
   let cartContent = await getAll();
@@ -16,30 +14,12 @@ async function getAllCartContentsAction(request, response) {
 async function getCartContentByIDAction(request, response) {
   let id = request.params.id;
   let cartContent = await getByID(id);
-
-  let warenkorb = await getAddressByID(cartContent.warenkorbID);
-  let produkt = await getProductByID(cartContent.produktID);
-
-  let combinedJson = {
-    warenkorbinhaltID: cartContent.warenkorbinhaltID,
-    warenkorbID: warenkorb,
-    produktID: produkt,
-    anzahl: cartContent.anzahl,
-  };
-
-  response.json(combinedJson);
+  response.json(cartContent);
 }
 
 async function getCartContentByCartIDAction(request, response) {
   let id = request.params.id;
   let cartContent = await getByCartId(id);
-
-  // combine product model with cartContent model
-  for (let i = 0; i < cartContent.length; i++) {
-    let product = await getProductByID(cartContent[i].produktID);
-    cartContent[i].produktID = product;
-  }
-
   response.json(cartContent);
 }
 
@@ -65,7 +45,7 @@ function readCartContentFromRequest(request) {
   let body = request.body;
   let warenkorbInhaltID = body.warenkorbinhaltID;
   let warenkorbID = body.warenkorbID;
-  let produktID = body.produktID;;
+  let produktID = body.produktID;
   let anzahl = body.anzahl;
 
   return {
@@ -73,7 +53,6 @@ function readCartContentFromRequest(request) {
     warenkorbID: warenkorbID,
     produktID: produktID,
     anzahl: anzahl
-    
   };
 }
 
