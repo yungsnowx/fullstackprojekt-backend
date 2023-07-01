@@ -149,6 +149,9 @@ VALUES ("wjBwf8v4RreBYIk4FlYlnVyp9Ih2", "Kaan", "D", 1);
 INSERT INTO `User` (userID, vorname, nachname, isAdmin)
 VALUES ("znQcOGQvf2Q1YacafQUd4iozOw32", "Dimitrios", "C", 1);
 
+INSERT INTO `User` (userID, vorname, nachname, isAdmin)
+VALUES ("Oapbs8pap7N3apKek4Q2Je6YnW63", "Eren", "Y", 1);
+
 -- Für Produkt
 
 INSERT INTO `Produkt` (produktname, produktbeschreibung, preis, bild)
@@ -185,6 +188,14 @@ INSERT INTO `Kundenadresse` VALUES ("4", 5);
 
 INSERT INTO `Kundenadresse` VALUES ("5", 4);
 
+INSERT INTO `Kundenadresse` VALUES ("1MQSIfgsdchAZCG23YJWXTei2UL2", 4);
+
+INSERT INTO `Kundenadresse` VALUES ("wjBwf8v4RreBYIk4FlYlnVyp9Ih2", 2);
+
+INSERT INTO `Kundenadresse` VALUES ("znQcOGQvf2Q1YacafQUd4iozOw32", 3);
+
+INSERT INTO `Kundenadresse` VALUES ("Oapbs8pap7N3apKek4Q2Je6YnW63", 1);
+
 -- für Warenkorb
 
 INSERT INTO `Warenkorb` (userID) VALUES ("1");
@@ -194,6 +205,14 @@ INSERT INTO `Warenkorb` (userID) VALUES ("5");
 INSERT INTO `Warenkorb` (userID) VALUES ("1");
 
 INSERT INTO `Warenkorb` (userID) VALUES ("2");
+
+INSERT INTO `Warenkorb` (userID) VALUES ("1MQSIfgsdchAZCG23YJWXTei2UL2");
+
+INSERT INTO `Warenkorb` (userID) VALUES ("wjBwf8v4RreBYIk4FlYlnVyp9Ih2");
+
+INSERT INTO `Warenkorb` (userID) VALUES ("znQcOGQvf2Q1YacafQUd4iozOw32");
+
+INSERT INTO `Warenkorb` (userID) VALUES ("Oapbs8pap7N3apKek4Q2Je6YnW63");
 
 -- Für Warenkorbinhalt
 
