@@ -51,10 +51,12 @@ async function getByCartId(id) {
   });
 }
 
+function create(cartContent) {
+  return CartContent.create(cartContent);
+}
+
 function save(cartContent) {
-  return CartContent.upsert(
-    cartContent
-    );
+  return CartContent.upsert(cartContent);
 }
 
 function removeByID(id) {
@@ -65,4 +67,4 @@ function removeByID(id) {
   });
 }
 
-export { getByID, getByCartId, getAll, save, removeByID };
+export { getByID, getByCartId, getAll, create, save, removeByID };
