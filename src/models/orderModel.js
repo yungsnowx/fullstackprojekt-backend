@@ -1,5 +1,5 @@
-import { sequelize } from "../config/db.js";
 import { DataTypes } from "sequelize";
+import { sequelize } from "../config/db.js";
 
 const Order = sequelize.define(
   "Bestellung",
@@ -29,7 +29,7 @@ const Order = sequelize.define(
       autoIncrement: false,
     },
     bezahlt: {
-      type: DataTypes.TINYINT,
+      type: DataTypes.BOOLEAN,
       autoIncrement: false,
       default: null,
     },
@@ -65,4 +65,4 @@ function removeByID(id) {
   });
 }
 
-export { getByID, getAll, save, removeByID };
+export { getAll, getByID, removeByID, save };
