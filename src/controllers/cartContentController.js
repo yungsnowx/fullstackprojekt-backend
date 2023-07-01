@@ -1,4 +1,5 @@
 import {
+  create,
   getAll,
   getByCartId,
   getByID,
@@ -25,14 +26,14 @@ async function getCartContentByCartIDAction(request, response) {
 
 async function addCartContentAction(request, response) {
   let jsonObject = readCartContentFromRequest(request);
-  await save(jsonObject);
-  response.json();
+  let cartContent = await create(jsonObject);
+  response.json(cartContent)
 }
 
 async function updateCartContentAction(request, response) {
   let jsonObject = readCartContentFromRequest(request);
-  await save(jsonObject);
-  response.json();
+  let cartContent = await save(jsonObject);
+  response.json(cartContent);
 }
 
 async function deleteCartContentByIDAction(request, response) {
