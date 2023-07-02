@@ -10,12 +10,13 @@ import {
 
 const router = Router();
 const routename = "useradresse";
+import { authMiddleware } from "../middleware/fireAuth.js";
 
 router.get(`/${routename}`, getAllUserAddressAction);
 router.get(`/${routename}/user/:id`, getUserAddressByUserIdAction);
 router.get(`/${routename}/address/:id`, getUserAddressByAddressIdAction);
-router.post(`/${routename}`, addUserAddressAction);
-router.put(`/${routename}`, updateUserAddressAction);
-router.delete(`/${routename}`, deleteUserAddressAction);
+router.post(`/${routename}`,authMiddleware, addUserAddressAction);
+router.put(`/${routename}`,authMiddleware, updateUserAddressAction);
+router.delete(`/${routename}`,authMiddleware, deleteUserAddressAction);
 
 export { router };

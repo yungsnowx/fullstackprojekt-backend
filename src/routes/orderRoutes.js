@@ -9,11 +9,12 @@ import {
 
 const router = Router();
 const routeName = "bestellung";
+import { authMiddleware } from "../middleware/fireAuth.js";
 
 router.get(`/${routeName}`, getAllOrdersAction);
 router.get(`/${routeName}/:id`, getOrderByIdAction);
-router.post(`/${routeName}`, addOrderAction);
-router.put(`/${routeName}`, updateOrderAction);
-router.delete(`/${routeName}/:id`, deleteOrderByIdAction);
+router.post(`/${routeName}`,authMiddleware, addOrderAction);
+router.put(`/${routeName}`,authMiddleware, updateOrderAction);
+router.delete(`/${routeName}/:id`,authMiddleware, deleteOrderByIdAction);
 
 export { router };

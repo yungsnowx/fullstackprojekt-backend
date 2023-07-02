@@ -10,12 +10,13 @@ import {
 
 const router = Router();
 const routeName = "warenkorbinhalt";
+import { authMiddleware } from "../middleware/fireAuth.js";
 
 router.get(`/${routeName}`, getAllCartContentsAction);
 router.get(`/${routeName}/:id`, getCartContentByIDAction);
 router.get(`/${routeName}/warenkorb/:id`, getCartContentByCartIDAction);
-router.post(`/${routeName}`, addCartContentAction);
-router.put(`/${routeName}`, updateCartContentAction);
-router.delete(`/${routeName}/:id`, deleteCartContentByIDAction);
+router.post(`/${routeName}`,authMiddleware, addCartContentAction);
+router.put(`/${routeName}`,authMiddleware, updateCartContentAction);
+router.delete(`/${routeName}/:id`,authMiddleware, deleteCartContentByIDAction);
 
 export { router };
