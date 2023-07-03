@@ -5,7 +5,6 @@ const userController = new UserController();
 const router = Router();
 const routeName = "users";
 import { authMiddleware } from "../middleware/fireAuth.js";
-ss
 router.get(`/${routeName}`, userController.getAllUsersAction);
 router.get(`/${routeName}/:id`, userController.getUserByIdAction);
 router.post(`/${routeName}`,authMiddleware, userController.addUserAction);
